@@ -1,5 +1,7 @@
 ## e-shop
 
+![preview](assets/0-preview.png)
+
 Мобилно приложение/шаблон (template) за специализиран електронен магазин.
 
 ### Елементи на приложението:
@@ -21,3 +23,18 @@
 
 Скайп канал за комуникация на екипа:
 `https://join.skype.com/o6R5qwEo1a0K`
+
+![home](assets/1-home.png)
+
+![menu](assets/2-menu.png)
+
+![menu_expanded](assets/3-menu-expanded.png)
+
+![search](assets/4-search.png)
+
+![product_details](assets/5-product-details.png)
+
+![cart](assets/6-cart.png)
+
+![checkout](assets/7-checkout.png)
+

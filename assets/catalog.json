@@ -73,6 +73,7 @@
           "category": "202",
           "price": "1000.99",
           "date": "30.10.2014",
+          "discount": "10",
           "title": "Nexus 9",
           "photos": {
             "photo": [

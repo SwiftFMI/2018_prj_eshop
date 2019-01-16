@@ -1,7 +1,6 @@
 {
   "catalog": {
-    "categories": {
-      "category": [
+    "categories": [
         {
           "id": "100",
           "title": "Notebooks"
@@ -65,9 +64,8 @@
           "title": "Wi-Fi Routers"
         }
       ]
-    },
-    "slider": {
-      "product": [
+    ,
+    "slider": [
         {
           "id": "1",
           "category": "202",
@@ -153,10 +151,8 @@
           "condition": "New",
           "color": "Black"
         }
-      ]
-    },
-    "products": {
-      "product": [
+      ],
+    "products": [
         {
           "id": "6",
           "category": "201",
@@ -566,6 +562,6 @@
           "color": "Black"
         }
       ]
-    }
+    
   }
 }

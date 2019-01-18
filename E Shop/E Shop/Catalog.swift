@@ -8,18 +8,25 @@
 
 import Foundation
 
-struct Model {
-    static let catalog_url = Bundle.main.url(forResource: "assets/catalog", withExtension: "json")
-}
-
-
-
 struct Catalog {
     private let categories: [Category]
     private let all_products: [Product]
     private let slider: [String: Int] // id => index in all_products
     private let products: [String: Int] // id => index in all_products
     private let categories_index: [String: Int] // id => index in categories
+    
+    var productsIds: [String] {
+        get {
+            return Array(products.keys)
+        }
+    }
+    
+    func getProduct(id: String) -> Product? {
+        if let index = products[id] ?? slider[id] {
+            return all_products[index]
+        }
+        return nil
+    }
     
 //    var products_for_slider {
 //        get {
@@ -49,7 +56,11 @@ extension Catalog: Decodable {
         let slider = try container.decode([Product].self, forKey: .slider)
         let products = try container.decode([Product].self, forKey: .products)
         
-        self.init(categories, slider, products)
+        self.categories = categories
+        self.all_products = slider + products
+        self.slider = Dictionary(uniqueKeysWithValues: zip(slider.map {$0.id}, 0..<slider.count))
+        self.products = Dictionary(uniqueKeysWithValues: zip(products.map {$0.id}, slider.count..<slider.count + products.count))
+        self.categories_index = Dictionary(uniqueKeysWithValues: zip(categories.map {$0.id}, 0..<categories.count))
     }
 }
 

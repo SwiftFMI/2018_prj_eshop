@@ -82,19 +82,9 @@ struct Product: Codable {
     let condition: String
     let color: String
     
-    var photos_urls: [URL] {
+    var images: [String] {
         get {
-            var arr: [URL] = []
-            
-            for str in photos["photo"] ?? [] {
-                if let url = Bundle.main.url(forResource: str, withExtension: "imageset", subdirectory: "/assets") {
-                    arr.append(url)
-                } else if let url = URL(string: str) {
-                    arr.append(url)
-                }
-            }
-            
-            return arr;
+            return photos["photo"] ?? []
         }
     }
 }

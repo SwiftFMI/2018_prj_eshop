@@ -154,6 +154,23 @@
       ],
     "products": [
         {
+            "id": "2",
+            "category": "202",
+            "price": "600",
+            "discount": "20",
+            "date": "30.10.2014",
+            "title": "999999",
+            "photos": {
+                "photo": [
+                    "http://images.amazon.com/images/G/01/electronics/samsung/samsung-galaxytab2-10-main-wide-lg.jpg",
+                    "lg_g3"
+                ]
+            },
+            "description": "8.9 IPS LCD, Android 5.0, NVIDIA Tegra K1 processor 2.3 GHz, 32 Gb",
+            "condition": "New",
+            "color": "Black"
+        },
+        {
           "id": "6",
           "category": "201",
           "price": "999",

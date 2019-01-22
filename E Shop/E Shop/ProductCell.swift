@@ -47,12 +47,12 @@ class ProductCell {
                 view?.photoView!.image = image
                 images.append(image)
             } else if let url = URL(string: name) {
-                DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                DispatchQueue.global(qos: .userInitiated).async { [weak self, title = product.title] in
                     guard let data = try? Data(contentsOf: url), let image = UIImage(data: data) else {
                         return
                     }
                     DispatchQueue.main.async {
-                        if let view = self?.view , view.titleView?.text == product.title {
+                        if let view = self?.view , view.titleView?.text == title {
                             view.photoView!.image = image
                             view.photoView!.setNeedsDisplay()
                             self?.images.append(image)

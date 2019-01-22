@@ -22,7 +22,7 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     var cells: [ProductCell] = [] {
         didSet {
-            collectionView!.reloadData()
+            collectionView.reloadData()
         }
     }
     
@@ -72,9 +72,13 @@ class ProductsCollectionViewController: UICollectionViewController {
             withReuseIdentifier: reuseIdentifier,
             for: indexPath
             ) as! ProductCollectionViewCell
-        
+    
         return cells[indexPath.row].setView(view: cellView, catalog: catalog)
     }
 }
 
-
+extension ProductsCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 150)
+    }
+}

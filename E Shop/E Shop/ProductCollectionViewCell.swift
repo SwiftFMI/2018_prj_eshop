@@ -10,8 +10,9 @@ import UIKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var photoView: UIImageView!
+    static let height = CGFloat(150)
     
+    @IBOutlet weak var photoView: UIImageView!
     
     @IBOutlet weak var titleView: UILabel!
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Catalog {
+final class Catalog {
     private let categories: [Category]
     private let all_products: [Product]
     private let slider: [String: Int] // id => index in all_products
@@ -18,6 +18,12 @@ struct Catalog {
     var productsIds: [String] {
         get {
             return Array(products.keys)
+        }
+    }
+    
+    var sliderIds: [String] {
+        get {
+            return Array(slider.keys)
         }
     }
     
@@ -50,17 +56,17 @@ extension Catalog: Decodable {
         case products
     }
     
-    init(from decoder: Decoder) throws {
+    convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MyStructKeys.self)
         let categories = try container.decode([Category].self, forKey: .categories)
         let slider = try container.decode([Product].self, forKey: .slider)
         let products = try container.decode([Product].self, forKey: .products)
-        
-        self.categories = categories
-        self.all_products = slider + products
-        self.slider = Dictionary(uniqueKeysWithValues: zip(slider.map {$0.id}, 0..<slider.count))
-        self.products = Dictionary(uniqueKeysWithValues: zip(products.map {$0.id}, slider.count..<slider.count + products.count))
-        self.categories_index = Dictionary(uniqueKeysWithValues: zip(categories.map {$0.id}, 0..<categories.count))
+        self.init(categories, slider, products)
+//        self.categories = categories
+//        self.all_products = slider + products
+//        self.slider = Dictionary(uniqueKeysWithValues: zip(slider.map {$0.id}, 0..<slider.count))
+//        self.products = Dictionary(uniqueKeysWithValues: zip(products.map {$0.id}, slider.count..<slider.count + products.count))
+//        self.categories_index = Dictionary(uniqueKeysWithValues: zip(categories.map {$0.id}, 0..<categories.count))
     }
 }
 

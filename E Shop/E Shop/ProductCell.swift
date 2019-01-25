@@ -36,7 +36,7 @@ class ProductCell {
             
             view.titleView?.text = product.title
             view.descriptionView?.text = product.description
-            view.priceView?.text = product.price
+            view.priceView?.text = product.price + "$"
         }
         return view
     }

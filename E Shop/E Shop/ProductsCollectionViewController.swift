@@ -8,23 +8,75 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let cellsNames = ["SliderViewCell", "ProductCollectionViewCell"]
+
+private let reuseIdentifiers = ["Slider", "Cell"]
 
 private let catalog_url = Bundle.main.url(forResource: "catalog", withExtension: "json")!
 
-class ProductsCollectionViewController: UICollectionViewController {
+class SliderController: NSObject, UICollectionViewDataSource {
     
-    var catalog: Catalog? = nil {
-        didSet {
-            cells = catalog?.productsIds.map {ProductCell(id: $0)} ?? []
+    private var cells: [ProductCell] = []
+    
+    var notCells: Bool {
+        get {
+            return cells.isEmpty
         }
     }
     
-    var cells: [ProductCell] = [] {
+    var catalog: Catalog? {
         didSet {
+            cells = catalog?.sliderIds.map {ProductCell(id: $0)} ?? []
+        }
+    }
+    
+    
+    func connectTo(view: SliderViewCell) {
+        view.productsView.dataSource = self
+        view.productsView.register(
+            UINib(nibName: cellsNames[1], bundle: nil),
+            forCellWithReuseIdentifier: reuseIdentifiers[1]
+        )
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return cells.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cellView = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifiers[1],
+            for: indexPath
+            ) as! ProductCollectionViewCell
+        
+        return cells[indexPath.row].setView(view: cellView, catalog: catalog)
+    }
+}
+
+extension SliderController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: ProductCollectionViewCell.height)
+    }
+}
+
+class ProductsCollectionViewController: UICollectionViewController {
+    
+    private let slider = SliderController()
+    
+    private var catalog: Catalog? {
+        didSet {
+            cells = catalog?.productsIds.map {ProductCell(id: $0)} ?? []
+            slider.catalog = catalog
+            
             collectionView.reloadData()
         }
     }
+    
+    private var cells: [ProductCell] = []
     
     private func loadCatalog() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -43,9 +95,13 @@ class ProductsCollectionViewController: UICollectionViewController {
     }
     
     
-    private func registerCell() {
-        let nib = UINib(nibName: "ProductCollectionViewCell", bundle: nil)
-        collectionView!.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+    private func registerCells() {
+        for (name, id) in zip(cellsNames, reuseIdentifiers) {
+            collectionView!.register(
+                UINib(nibName: name, bundle: nil),
+                forCellWithReuseIdentifier: id
+            )
+        }
     }
     
     override func viewDidLoad() {
@@ -53,32 +109,43 @@ class ProductsCollectionViewController: UICollectionViewController {
 
         loadCatalog()
         
-        registerCell()
+        registerCells()
     }
-
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return cells.count
+        switch section {
+        case 0: return slider.notCells ? 0 : 1
+        case 1: return cells.count
+        default: return 0
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellView = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifier,
+        let view = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifiers[indexPath.section],
             for: indexPath
-            ) as! ProductCollectionViewCell
-    
-        return cells[indexPath.row].setView(view: cellView, catalog: catalog)
+            )
+        if let cellView = view as? ProductCollectionViewCell {
+            return cells[indexPath.row].setView(view: cellView, catalog: catalog)
+        }
+        if let sliderView = view as? SliderViewCell {
+            slider.connectTo(view: sliderView)
+            return sliderView
+        }
+
+        return view
     }
 }
 
 extension ProductsCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: 150)
+        return CGSize(
+            width: collectionView.frame.size.width,
+            height: indexPath.section == 1 ? ProductCollectionViewCell.height : SliderViewCell.height
+        )
     }
 }

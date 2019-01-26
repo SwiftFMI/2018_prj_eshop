@@ -16,7 +16,28 @@ private let catalog_url = Bundle.main.url(forResource: "catalog", withExtension:
 
 class SliderController: NSObject, UICollectionViewDataSource {
     
-    private var cells: [ProductCell] = []
+    private func updatePageControlSize() {
+        view?.pageControl.numberOfPages = cells.count
+    }
+    
+    private var cells: [ProductCell] = [] {
+        didSet {
+            updatePageControlSize()
+        }
+    }
+    
+    private var view: SliderViewCell? {
+        didSet {
+            view?.productsView.dataSource = self
+            view?.productsView.delegate = self
+            view?.productsView.register(
+                UINib(nibName: cellsNames[1], bundle: nil),
+                forCellWithReuseIdentifier: reuseIdentifiers[1]
+            )
+            
+            updatePageControlSize()
+        }
+    }
     
     var notCells: Bool {
         get {
@@ -30,13 +51,8 @@ class SliderController: NSObject, UICollectionViewDataSource {
         }
     }
     
-    
     func connectTo(view: SliderViewCell) {
-        view.productsView.dataSource = self
-        view.productsView.register(
-            UINib(nibName: cellsNames[1], bundle: nil),
-            forCellWithReuseIdentifier: reuseIdentifiers[1]
-        )
+        self.view = view
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -60,6 +76,20 @@ class SliderController: NSObject, UICollectionViewDataSource {
 extension SliderController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width, height: ProductCollectionViewCell.height)
+    }
+}
+
+extension SliderController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let pageControl = view?.pageControl else {
+            return
+        }
+        pageControl.currentPage = pageControl.currentPage < indexPath.row ? 1 : -1
+        pageControl.updateCurrentPageDisplay()
     }
 }
 
@@ -138,6 +168,10 @@ class ProductsCollectionViewController: UICollectionViewController {
         }
 
         return view
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO
     }
 }
 

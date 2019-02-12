@@ -192,7 +192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRV-4x-K7J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800.79999999999995" y="-744.3778110944528"/>
+            <point key="canvasLocation" x="1050" y="-830"/>
         </scene>
         <!--Products Collection View Controller-->
         <scene sceneID="wRx-jM-o2l">
@@ -216,25 +216,75 @@
                     </collectionView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ogo-27-fML">
-                        <barButtonItem key="leftBarButtonItem" title="hamburgerMenu" image="menu_drawer" id="S4v-gZ-TXA">
-                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <connections>
-                                <segue destination="HCx-1T-EXp" kind="popoverPresentation" popoverAnchorBarButtonItem="S4v-gZ-TXA" id="6Yk-ic-8E3">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Hamburger" style="plain" id="lWB-ex-2b1">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" id="uRp-BH-MXY">
+                                <rect key="frame" x="16" y="10" width="78" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="menu_drawer"/>
+                            </button>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="CartButton" image="cart_empty" style="plain" id="qIc-cx-iXd">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" id="9ur-74-S7y">
+                                    <rect key="frame" x="327" y="6" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="cart_empty"/>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem title="SearchButton" style="plain" id="Ndy-cN-Vj0" userLabel="Search">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" id="2Bc-zI-ktR">
+                                    <rect key="frame" x="287" y="6" width="32" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                    </accessibility>
+                                    <state key="normal" image="search"/>
+                                    <connections>
+                                        <action selector="willAppearSearchBar" destination="uL0-jT-UAs" eventType="touchUpInside" id="krr-HU-xJE"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                        <connections>
+                            <outlet property="titleView" destination="T85-1i-PpR" id="MnY-WK-46U"/>
+                        </connections>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cancelSearchButtonItem" destination="ose-0c-OLB" id="iM4-BJ-zdG"/>
+                        <outlet property="searchBar" destination="T85-1i-PpR" id="JYE-n6-dXO"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dLf-tn-loa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="CancelSearch" style="plain" id="ose-0c-OLB">
+                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uJl-iR-tBo">
+                        <rect key="frame" x="196" y="7" width="83" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                        <state key="normal" title="Cancel"/>
+                        <connections>
+                            <action selector="willDisappearSearchBar" destination="uL0-jT-UAs" eventType="touchUpInside" id="ZTU-oZ-eof"/>
+                        </connections>
+                    </button>
+                </barButtonItem>
+                <searchBar hidden="YES" contentMode="redraw" id="T85-1i-PpR">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="uL0-jT-UAs" id="pS3-6L-ssU"/>
+                    </connections>
+                </searchBar>
             </objects>
             <point key="canvasLocation" x="801" y="-37"/>
         </scene>
     </scenes>
     <resources>
+        <image name="cart_empty" width="32" height="32"/>
         <image name="menu_arrow_down" width="21" height="21"/>
         <image name="menu_drawer" width="24" height="24"/>
         <image name="menu_plus" width="24" height="24"/>
+        <image name="search" width="32" height="32"/>
     </resources>
 </document>

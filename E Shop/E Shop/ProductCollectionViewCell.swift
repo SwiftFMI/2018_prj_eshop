@@ -12,6 +12,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
     static let height = CGFloat(150)
     
+    var product_id: String!
+    
     @IBOutlet weak var photoView: UIImageView!
     
     @IBOutlet weak var titleView: UILabel!

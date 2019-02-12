@@ -14,9 +14,9 @@
 		CF59632321F1EB5B0011ADBD /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = CF59632221F1E7F70011ADBD /* catalog.json */; };
 		CF8922CF21FB680A00EFDC24 /* SliderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */; };
 		CF8922D021FB680A00EFDC24 /* SliderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */; };
+		CF9457F9221337D000AAE4FD /* SliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9457F8221337D000AAE4FD /* SliderController.swift */; };
 		CFC32B1821EF572E007001C5 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC32B1721EF572E007001C5 /* Catalog.swift */; };
 		E594698921B6AA4F007A3CE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E594698821B6AA4F007A3CE8 /* AppDelegate.swift */; };
-		E594698B21B6AA4F007A3CE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E594698A21B6AA4F007A3CE8 /* ViewController.swift */; };
 		E594699021B6AA5A007A3CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E594698F21B6AA5A007A3CE8 /* Assets.xcassets */; };
 		E594699321B6AA5A007A3CE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E594699121B6AA5A007A3CE8 /* Main.storyboard */; };
 		E594699B21B6AAB9007A3CE8 /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E594699A21B6AAB9007A3CE8 /* AppAssets.xcassets */; };
@@ -31,10 +31,10 @@
 		CF59632221F1E7F70011ADBD /* catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
 		CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewCell.swift; sourceTree = "<group>"; };
 		CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderViewCell.xib; sourceTree = "<group>"; };
+		CF9457F8221337D000AAE4FD /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
 		CFC32B1721EF572E007001C5 /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		E594698521B6AA4F007A3CE8 /* E Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E594698821B6AA4F007A3CE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E594698A21B6AA4F007A3CE8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E594698F21B6AA5A007A3CE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E594699221B6AA5A007A3CE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E594699421B6AA5A007A3CE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,13 +75,13 @@
 				CF273CA321F2331D00C40D0C /* ProductCollectionViewCell.swift */,
 				CF273CA421F2331D00C40D0C /* ProductCollectionViewCell.xib */,
 				E594698821B6AA4F007A3CE8 /* AppDelegate.swift */,
-				E594698A21B6AA4F007A3CE8 /* ViewController.swift */,
 				E594698F21B6AA5A007A3CE8 /* Assets.xcassets */,
 				E594699A21B6AAB9007A3CE8 /* AppAssets.xcassets */,
 				E594699C21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets */,
 				E594699121B6AA5A007A3CE8 /* Main.storyboard */,
 				CF273CA921F24E8E00C40D0C /* ProductCell.swift */,
 				CF273CA721F236F600C40D0C /* ProductsCollectionViewController.swift */,
+				CF9457F8221337D000AAE4FD /* SliderController.swift */,
 				CFC32B1721EF572E007001C5 /* Catalog.swift */,
 				CF59632221F1E7F70011ADBD /* catalog.json */,
 				CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */,
@@ -166,12 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E594698B21B6AA4F007A3CE8 /* ViewController.swift in Sources */,
 				CFC32B1821EF572E007001C5 /* Catalog.swift in Sources */,
 				CF273CA821F236F600C40D0C /* ProductsCollectionViewController.swift in Sources */,
 				CF8922CF21FB680A00EFDC24 /* SliderViewCell.swift in Sources */,
 				CF273CAA21F24E8E00C40D0C /* ProductCell.swift in Sources */,
 				E594698921B6AA4F007A3CE8 /* AppDelegate.swift in Sources */,
+				CF9457F9221337D000AAE4FD /* SliderController.swift in Sources */,
 				CF273CA521F2331E00C40D0C /* ProductCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

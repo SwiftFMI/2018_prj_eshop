@@ -8,105 +8,58 @@
 
 import UIKit
 
-private let cellsNames = ["SliderViewCell", "ProductCollectionViewCell"]
+let cellsNames = ["SliderViewCell", "ProductCollectionViewCell"]
 
-private let reuseIdentifiers = ["Slider", "Cell"]
+let reuseIdentifiers = ["Slider", "Cell"]
 
 private let catalog_url = Bundle.main.url(forResource: "catalog", withExtension: "json")!
 
-class SliderController: NSObject, UICollectionViewDataSource {
+class ProductsCollectionViewController: UICollectionViewController {
     
-    private func updatePageControlSize() {
-        view?.pageControl.numberOfPages = cells.count
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.delegate = self
+        }
+    }
+    
+    @IBOutlet var cancelSearchButtonItem: UIBarButtonItem!
+    
+    private var leftBarButtonItems: [UIBarButtonItem]?
+    
+    private var rightBarButtonItems: [UIBarButtonItem]?
+    
+    private let slider = SliderController()
+    
+    private var sliderHidden = true
+    
+    private func updateSliderHidden() {
+        sliderHidden = slider.cells.isEmpty
     }
     
     private var cells: [ProductCell] = [] {
         didSet {
-            updatePageControlSize()
-        }
-    }
-    
-    private var view: SliderViewCell? {
-        didSet {
-            view?.productsView.dataSource = self
-            view?.productsView.delegate = self
-            view?.productsView.register(
-                UINib(nibName: cellsNames[1], bundle: nil),
-                forCellWithReuseIdentifier: reuseIdentifiers[1]
-            )
-            
-            updatePageControlSize()
-        }
-    }
-    
-    var notCells: Bool {
-        get {
-            return cells.isEmpty
-        }
-    }
-    
-    var catalog: Catalog? {
-        didSet {
-            cells = catalog?.sliderIds.map {ProductCell(id: $0)} ?? []
-        }
-    }
-    
-    func connectTo(view: SliderViewCell) {
-        self.view = view
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cells.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cellView = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifiers[1],
-            for: indexPath
-            ) as! ProductCollectionViewCell
-        
-        return cells[indexPath.row].setView(view: cellView, catalog: catalog)
-    }
-}
-
-extension SliderController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: ProductCollectionViewCell.height)
-    }
-}
-
-extension SliderController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let pageControl = view?.pageControl else {
-            return
-        }
-        pageControl.currentPage = pageControl.currentPage < indexPath.row ? 1 : -1
-        pageControl.updateCurrentPageDisplay()
-    }
-}
-
-class ProductsCollectionViewController: UICollectionViewController {
-    
-    private let slider = SliderController()
-    
-    private var catalog: Catalog? {
-        didSet {
-            cells = catalog?.productsIds.map {ProductCell(id: $0)} ?? []
-            slider.catalog = catalog
-            
             collectionView.reloadData()
         }
     }
     
-    private var cells: [ProductCell] = []
+    private func filterProducts(keys: [String]) -> [ProductCell] {
+        let set = Set(keys)
+        return products.filter {set.contains($0.product.id)}
+    }
+    
+    private var products: [ProductCell] = [] {
+        didSet {
+            cells = filterProducts(keys: catalog.productsIds)
+            slider.cells = filterProducts(keys: catalog.sliderIds)
+            updateSliderHidden()
+        }
+    }
+    
+    private var catalog: Catalog! {
+        didSet {
+            products = catalog.all_products.map {ProductCell(product: $0)}
+        }
+    }
     
     private func loadCatalog() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
@@ -124,10 +77,33 @@ class ProductsCollectionViewController: UICollectionViewController {
         }
     }
     
+    @IBAction func willAppearSearchBar() {
+        searchBar.isHidden = false
+        searchBar.text = ""
+        
+        leftBarButtonItems = navigationItem.leftBarButtonItems
+        rightBarButtonItems = navigationItem.rightBarButtonItems
+        
+        navigationItem.setLeftBarButtonItems(nil, animated: true)
+        navigationItem.setRightBarButton(cancelSearchButtonItem, animated: true)
+    }
+    
+    @IBAction func willDisappearSearchBar() {
+        searchBar.isHidden = true
+        
+        navigationItem.setLeftBarButtonItems(leftBarButtonItems, animated: true)
+        navigationItem.setRightBarButtonItems(rightBarButtonItems, animated: true)
+        
+        leftBarButtonItems = nil
+        rightBarButtonItems = nil
+        
+        updateSliderHidden()
+        cells = filterProducts(keys: catalog?.productsIds ?? [])
+    }
     
     private func registerCells() {
         for (name, id) in zip(cellsNames, reuseIdentifiers) {
-            collectionView!.register(
+            collectionView.register(
                 UINib(nibName: name, bundle: nil),
                 forCellWithReuseIdentifier: id
             )
@@ -147,11 +123,10 @@ class ProductsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0: return slider.notCells ? 0 : 1
-        case 1: return cells.count
-        default: return 0
+        if section == 1 {
+            return cells.count
         }
+        return sliderHidden ? 0 : 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,11 +135,9 @@ class ProductsCollectionViewController: UICollectionViewController {
             for: indexPath
             )
         if let cellView = view as? ProductCollectionViewCell {
-            return cells[indexPath.row].setView(view: cellView, catalog: catalog)
-        }
-        if let sliderView = view as? SliderViewCell {
+            cells[indexPath.row].setView(view: cellView)
+        } else if let sliderView = view as? SliderViewCell {
             slider.connectTo(view: sliderView)
-            return sliderView
         }
 
         return view
@@ -181,5 +154,13 @@ extension ProductsCollectionViewController: UICollectionViewDelegateFlowLayout {
             width: collectionView.frame.size.width,
             height: indexPath.section == 1 ? ProductCollectionViewCell.height : SliderViewCell.height
         )
+    }
+}
+
+extension ProductsCollectionViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        sliderHidden = true
+        //simple ineffective algorithm
+        cells = searchText == "" ? [] : products.filter { $0.product.title.range(of: searchText, options: .caseInsensitive) != nil}
     }
 }

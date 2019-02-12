@@ -10,7 +10,7 @@ import Foundation
 
 final class Catalog {
     private let categories: [Category]
-    private let all_products: [Product]
+    let all_products: [Product]
     private let slider: [String: Int] // id => index in all_products
     private let products: [String: Int] // id => index in all_products
     private let categories_index: [String: Int] // id => index in categories
@@ -76,7 +76,7 @@ struct Category: Codable {
     let title: String
 }
 
-struct Product: Codable {
+class Product: Codable {
     let id: String
     let category: String
     let price: String

@@ -20,7 +20,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var descriptionView: UILabel! {
         didSet {
-            descriptionView.font = UIFont(name: descriptionView.font.fontName, size: 5)
+            descriptionView.font = UIFont(name: descriptionView.font.fontName, size: 8)
+            descriptionView.textColor = .gray
         }
     }
     

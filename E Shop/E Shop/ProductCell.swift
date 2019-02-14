@@ -10,10 +10,9 @@ import Foundation
 import UIKit
 
 class ProductCell {
-    
     let product: Product
     
-    var images: [UIImage]! //images is nil only before first call setView
+    private var images: [UIImage]! //images is nil only before first call setView
     
     init(product: Product) {
         self.product = product
@@ -23,7 +22,7 @@ class ProductCell {
         view.product_id = product.id
         view.titleView.text = product.title
         view.descriptionView.text = product.description
-        view.priceView.text = product.price + "$"
+        view.priceView.text = "$" + product.price
         view.photoView.image = images?.first
             
         if images == nil {
@@ -45,12 +44,15 @@ class ProductCell {
                     return
                 }
                 DispatchQueue.main.async {
-                    guard let view = view, let self = self, view.product_id == self.product.id else{
+                    guard let self = self else {
                         return
                     }
-                    view.photoView.image = image
-                    view.photoView.setNeedsDisplay()
                     self.images.append(image)
+                    
+                    if let view = view, view.product_id == self.product.id, view.photoView.image == nil {
+                        view.photoView.image = image
+                        view.photoView.setNeedsDisplay()
+                    }
                 }
             }
         }

@@ -12,6 +12,7 @@
 		CF273CA821F236F600C40D0C /* ProductsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF273CA721F236F600C40D0C /* ProductsCollectionViewController.swift */; };
 		CF273CAA21F24E8E00C40D0C /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF273CA921F24E8E00C40D0C /* ProductCell.swift */; };
 		CF59632321F1EB5B0011ADBD /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = CF59632221F1E7F70011ADBD /* catalog.json */; };
+		CF5A4536221619D800385CB9 /* titleImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF5A45352216197C00385CB9 /* titleImage.jpg */; };
 		CF8922CF21FB680A00EFDC24 /* SliderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */; };
 		CF8922D021FB680A00EFDC24 /* SliderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */; };
 		CF9457F9221337D000AAE4FD /* SliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9457F8221337D000AAE4FD /* SliderController.swift */; };
@@ -29,6 +30,7 @@
 		CF273CA721F236F600C40D0C /* ProductsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewController.swift; sourceTree = "<group>"; };
 		CF273CA921F24E8E00C40D0C /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		CF59632221F1E7F70011ADBD /* catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
+		CF5A45352216197C00385CB9 /* titleImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titleImage.jpg; sourceTree = "<group>"; };
 		CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewCell.swift; sourceTree = "<group>"; };
 		CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderViewCell.xib; sourceTree = "<group>"; };
 		CF9457F8221337D000AAE4FD /* SliderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				CF59632221F1E7F70011ADBD /* catalog.json */,
 				CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */,
 				CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */,
+				CF5A45352216197C00385CB9 /* titleImage.jpg */,
 				E594699421B6AA5A007A3CE8 /* Info.plist */,
 			);
 			path = "E Shop";
@@ -151,6 +154,7 @@
 			files = (
 				E594699321B6AA5A007A3CE8 /* Main.storyboard in Resources */,
 				CF59632321F1EB5B0011ADBD /* catalog.json in Resources */,
+				CF5A4536221619D800385CB9 /* titleImage.jpg in Resources */,
 				E594699D21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets in Resources */,
 				CF273CA621F2331E00C40D0C /* ProductCollectionViewCell.xib in Resources */,
 				CF8922D021FB680A00EFDC24 /* SliderViewCell.xib in Resources */,

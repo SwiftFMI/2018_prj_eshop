@@ -12,25 +12,34 @@ let cellsNames = ["SliderViewCell", "ProductCollectionViewCell"]
 
 let reuseIdentifiers = ["Slider", "Cell"]
 
-private let catalog_url = Bundle.main.url(forResource: "catalog", withExtension: "json")!
+private let catalogUrl = Bundle.main.url(forResource: "catalog", withExtension: "json")!
+private let titleImageUrl = Bundle.main.url(forResource: "titleImage", withExtension: "jpg")!
 
 class ProductsCollectionViewController: UICollectionViewController {
-    
-    @IBOutlet weak var searchBar: UISearchBar! {
-        didSet {
-            searchBar.delegate = self
-        }
+    private func createSearchBar() -> UISearchBar {
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        (searchBar.value(forKey: "cancelButton") as! UIButton).isEnabled = true
+        searchBar.placeholder = "Search Product".localizedCapitalized
+        return searchBar
     }
     
-    @IBOutlet var cancelSearchButtonItem: UIBarButtonItem!
-    
-    private var leftBarButtonItems: [UIBarButtonItem]?
-    
-    private var rightBarButtonItems: [UIBarButtonItem]?
+    private lazy var navigationSearchItem = { () -> UINavigationItem in
+        let navigationSearchItem = UINavigationItem()
+        navigationSearchItem.titleView = createSearchBar()
+        return navigationSearchItem
+    } ()
     
     private let slider = SliderController()
     
-    private var sliderHidden = true
+    private var sliderHidden = true {
+        didSet {
+            if oldValue != sliderHidden {
+                collectionView.reloadData()
+            }
+        }
+    }
     
     private func updateSliderHidden() {
         sliderHidden = slider.cells.isEmpty
@@ -49,9 +58,9 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     private var products: [ProductCell] = [] {
         didSet {
-            cells = filterProducts(keys: catalog.productsIds)
             slider.cells = filterProducts(keys: catalog.sliderIds)
             updateSliderHidden()
+            cells = filterProducts(keys: catalog.productsIds)
         }
     }
     
@@ -63,7 +72,7 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     private func loadCatalog() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let json = try? Data(contentsOf: catalog_url) else {
+            guard let json = try? Data(contentsOf: catalogUrl) else {
                 print("invalid json url")
                 return
             }
@@ -77,28 +86,20 @@ class ProductsCollectionViewController: UICollectionViewController {
         }
     }
     
-    @IBAction func willAppearSearchBar() {
-        searchBar.isHidden = false
-        searchBar.text = ""
-        
-        leftBarButtonItems = navigationItem.leftBarButtonItems
-        rightBarButtonItems = navigationItem.rightBarButtonItems
-        
-        navigationItem.setLeftBarButtonItems(nil, animated: true)
-        navigationItem.setRightBarButton(cancelSearchButtonItem, animated: true)
+    private func loadTitleImage() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let data = try? Data(contentsOf: titleImageUrl), let image = UIImage(data: data) else {
+                print("invalid title image url")
+                return
+            }
+            DispatchQueue.main.async {
+                self?.navigationItem.titleView = UIImageView(image: image)
+            }
+        }
     }
     
-    @IBAction func willDisappearSearchBar() {
-        searchBar.isHidden = true
-        
-        navigationItem.setLeftBarButtonItems(leftBarButtonItems, animated: true)
-        navigationItem.setRightBarButtonItems(rightBarButtonItems, animated: true)
-        
-        leftBarButtonItems = nil
-        rightBarButtonItems = nil
-        
-        updateSliderHidden()
-        cells = filterProducts(keys: catalog?.productsIds ?? [])
+    @IBAction func willAppearSearchBar() {
+        navigationController!.navigationBar.setItems([navigationSearchItem], animated: true)
     }
     
     private func registerCells() {
@@ -112,9 +113,8 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         loadCatalog()
-        
+        loadTitleImage()
         registerCells()
     }
 
@@ -136,8 +136,8 @@ class ProductsCollectionViewController: UICollectionViewController {
             )
         if let cellView = view as? ProductCollectionViewCell {
             cells[indexPath.row].setView(view: cellView)
-        } else if let sliderView = view as? SliderViewCell {
-            slider.connectTo(view: sliderView)
+        } else if let sliderViewCell = view as? SliderViewCell {
+            slider.connectTo(view: sliderViewCell)
         }
 
         return view
@@ -160,7 +160,24 @@ extension ProductsCollectionViewController: UICollectionViewDelegateFlowLayout {
 extension ProductsCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         sliderHidden = true
+        
         //simple ineffective algorithm
-        cells = searchText == "" ? [] : products.filter { $0.product.title.range(of: searchText, options: .caseInsensitive) != nil}
+        cells = searchText == "" ?
+            [] :
+            products.filter { $0.product.title.range(of: searchText, options: .caseInsensitive) != nil}
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationController!.navigationBar.setItems([navigationItem], animated: true)
+        searchBar.text = nil
+        updateSliderHidden()
+        cells = filterProducts(keys: catalog.productsIds)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        (searchBar.value(forKey: "cancelButton") as! UIButton).isEnabled = true
     }
 }
+
+

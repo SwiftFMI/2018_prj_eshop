@@ -7,66 +7,45 @@
 //
 
 import Foundation
+import UIKit
 
-final class Catalog {
-    private let categories: [Category]
-    let all_products: [Product]
-    private let slider: [String: Int] // id => index in all_products
-    private let products: [String: Int] // id => index in all_products
-    private let categories_index: [String: Int] // id => index in categories
+final class Catalog: Decodable {
+    let categories: [Category]
+    let sliderProducts: [Product]
+    let tableProducts: [Product]
+    let products: [Product]
     
-    var productsIds: [String] {
-        get {
-            return Array(products.keys)
-        }
-    }
-    
-    var sliderIds: [String] {
-        get {
-            return Array(slider.keys)
-        }
-    }
-    
-    func getProduct(id: String) -> Product? {
-        if let index = products[id] ?? slider[id] {
-            return all_products[index]
-        }
-        return nil
-    }
-    
-//    var products_for_slider {
+//    var productsIds: [String] {
 //        get {
-//
+//            return Array(products.keys)
 //        }
 //    }
+//
+//    var sliderIds: [String] {
+//        get {
+//            return Array(slider.keys)
+//        }
+//    }
+//
+//    func getProduct(id: String) -> Product? {
+//        if let index = products[id] ?? slider[id] {
+//            return all_products[index]
+//        }
+//        return nil
+//    }
     
-    private init(_ categories: [Category], _ slider: [Product], _ products: [Product]) {
-        self.categories = categories
-        self.all_products = slider + products
-        self.slider = Dictionary(uniqueKeysWithValues: zip(slider.map {$0.id}, 0..<slider.count))
-        self.products = Dictionary(uniqueKeysWithValues: zip(products.map {$0.id}, slider.count..<slider.count + products.count))
-        self.categories_index = Dictionary(uniqueKeysWithValues: zip(categories.map {$0.id}, 0..<categories.count))
-    }
-}
-
-extension Catalog: Decodable {
     enum MyStructKeys: String, CodingKey {
         case categories
         case slider
         case products
     }
-    
-    convenience init(from decoder: Decoder) throws {
+
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: MyStructKeys.self)
-        let categories = try container.decode([Category].self, forKey: .categories)
-        let slider = try container.decode([Product].self, forKey: .slider)
-        let products = try container.decode([Product].self, forKey: .products)
-        self.init(categories, slider, products)
-//        self.categories = categories
-//        self.all_products = slider + products
-//        self.slider = Dictionary(uniqueKeysWithValues: zip(slider.map {$0.id}, 0..<slider.count))
-//        self.products = Dictionary(uniqueKeysWithValues: zip(products.map {$0.id}, slider.count..<slider.count + products.count))
-//        self.categories_index = Dictionary(uniqueKeysWithValues: zip(categories.map {$0.id}, 0..<categories.count))
+        categories = try container.decode([Category].self, forKey: .categories)
+        sliderProducts = try container.decode([Product].self, forKey: .slider)
+        tableProducts = try container.decode([Product].self, forKey: .products)
+        products = sliderProducts + tableProducts
     }
 }
 
@@ -76,21 +55,43 @@ struct Category: Codable {
     let title: String
 }
 
-class Product: Codable {
+final class Product: Decodable {
     let id: String
     let category: String
     let price: String
     let discount: String
     let date: String
     let title: String
-    private let photos: [String:[String]]
     let description: String
     let condition: String
     let color: String
+    var images: [(image: UIImage?, resource: String)]
     
-    var images: [String] {
-        get {
-            return photos["photo"] ?? []
-        }
+    enum MyStructKeys: String, CodingKey {
+        case id
+        case category
+        case price
+        case discount
+        case date
+        case title
+        case photos
+        case description
+        case condition
+        case color
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: MyStructKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        category = try container.decode(String.self, forKey: .category)
+        price = try container.decode(String.self, forKey: .price)
+        discount = try container.decode(String.self, forKey: .discount)
+        date = try container.decode(String.self, forKey: .date)
+        title = try container.decode(String.self, forKey: .title)
+        images = ((try container.decode([String:[String]].self, forKey: .photos))["photo"] ?? [])
+            .map {(image: nil, resource: $0)}
+        description = try container.decode(String.self, forKey: .description)
+        condition = try container.decode(String.self, forKey: .condition)
+        color = try container.decode(String.self, forKey: .color)
     }
 }

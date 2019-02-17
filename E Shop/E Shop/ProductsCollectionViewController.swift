@@ -8,6 +8,14 @@
 
 import UIKit
 
+let cart = Cart()
+
+var catalog: Catalog!
+
+var currProduct: Product!
+
+let green = UIColor(displayP3Red: 132.0/255.0, green: 191.0/255.0, blue: 37.0/255.0, alpha: 1.0)
+
 let cellsNames = ["SliderViewCell", "ProductCollectionViewCell"]
 
 let reuseIdentifiers = ["Slider", "Cell"]
@@ -16,72 +24,82 @@ private let catalogUrl = Bundle.main.url(forResource: "catalog", withExtension: 
 private let titleImageUrl = Bundle.main.url(forResource: "titleImage", withExtension: "jpg")!
 
 class ProductsCollectionViewController: UICollectionViewController {
-    private func createSearchBar() -> UISearchBar {
-        let searchBar = UISearchBar()
-        searchBar.delegate = self
-        searchBar.showsCancelButton = true
-        (searchBar.value(forKey: "cancelButton") as! UIButton).isEnabled = true
-        searchBar.placeholder = "Search Product".localizedCapitalized
-        return searchBar
+    
+    private weak var cancelSearchButton: UIButton! {
+        didSet {
+            cancelSearchButton.isEnabled = true
+            cancelSearchButton.tintColor = .white
+        }
+    }
+    
+    @IBOutlet weak var cartButton: UIButton! {
+        didSet {
+            cartButton.setTitleColor(green, for: .normal)
+            setCartButtonEmptyImage()
+        }
+    }
+    
+    //private let productViewController = ProductDetailViewController()
+    
+    private var searchBar: UISearchBar {
+        get {
+            let searchBar = UISearchBar()
+            searchBar.delegate = self
+            searchBar.showsCancelButton = true
+            searchBar.placeholder = "Search Product".localizedCapitalized
+            cancelSearchButton = (searchBar.value(forKey: "cancelButton") as! UIButton)
+            return searchBar
+        }
     }
     
     private lazy var navigationSearchItem = { () -> UINavigationItem in
         let navigationSearchItem = UINavigationItem()
-        navigationSearchItem.titleView = createSearchBar()
+        navigationSearchItem.titleView = searchBar
+        navigationSearchItem.hidesBackButton = true
         return navigationSearchItem
     } ()
     
-    private let slider = SliderController()
+    private let slider = Slider()
     
     private var sliderHidden = true {
         didSet {
             if oldValue != sliderHidden {
-                collectionView.reloadData()
+                collectionView.reloadSections(IndexSet(0...0))
             }
         }
     }
     
-    private func updateSliderHidden() {
-        sliderHidden = slider.cells.isEmpty
-    }
-    
-    private var cells: [ProductCell] = [] {
+    private var products: [Product] = [] {
         didSet {
-            collectionView.reloadData()
+            collectionView.reloadSections(IndexSet(1...1))
         }
     }
     
-    private func filterProducts(keys: [String]) -> [ProductCell] {
-        let set = Set(keys)
-        return products.filter {set.contains($0.product.id)}
-    }
-    
-    private var products: [ProductCell] = [] {
+    @IBOutlet weak var spinner: UIActivityIndicatorView! {
         didSet {
-            slider.cells = filterProducts(keys: catalog.sliderIds)
-            updateSliderHidden()
-            cells = filterProducts(keys: catalog.productsIds)
-        }
-    }
-    
-    private var catalog: Catalog! {
-        didSet {
-            products = catalog.all_products.map {ProductCell(product: $0)}
+            spinner.hidesWhenStopped = true
         }
     }
     
     private func loadCatalog() {
+        navigationController!.navigationBar.isHidden = true
+        spinner.startAnimating()
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let json = try? Data(contentsOf: catalogUrl) else {
                 print("invalid json url")
                 return
             }
-            guard let catalog = try? JSONDecoder().decode(Catalog.self, from: json) else {
+            catalog = try? JSONDecoder().decode(Catalog.self, from: json)
+            guard catalog != nil else {
                 print("invalid json format")
                 return
             }
             DispatchQueue.main.async {
-                self?.catalog = catalog
+                self?.navigationController?.navigationBar.isHidden = false
+                self?.spinner.stopAnimating()
+                self?.slider.products = catalog.sliderProducts
+                self?.sliderHidden = self?.slider.isHidden ?? true
+                self?.products = catalog.tableProducts
             }
         }
     }
@@ -93,13 +111,15 @@ class ProductsCollectionViewController: UICollectionViewController {
                 return
             }
             DispatchQueue.main.async {
-                self?.navigationItem.titleView = UIImageView(image: image)
+                let imageView = UIImageView(image: image)
+                imageView.contentMode = .scaleAspectFit
+                self?.navigationItem.titleView = imageView
             }
         }
     }
     
     @IBAction func willAppearSearchBar() {
-        navigationController!.navigationBar.setItems([navigationSearchItem], animated: true)
+        navigationController!.navigationBar.pushItem(navigationSearchItem, animated: true)
     }
     
     private func registerCells() {
@@ -113,8 +133,11 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cart.delegate = self
+        slider.delegate = self
         loadCatalog()
         loadTitleImage()
+        navigationController!.navigationBar.barTintColor = green
         registerCells()
     }
 
@@ -124,7 +147,7 @@ class ProductsCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 1 {
-            return cells.count
+            return products.count
         }
         return sliderHidden ? 0 : 1
     }
@@ -134,17 +157,28 @@ class ProductsCollectionViewController: UICollectionViewController {
             withReuseIdentifier: reuseIdentifiers[indexPath.section],
             for: indexPath
             )
+        
         if let cellView = view as? ProductCollectionViewCell {
-            cells[indexPath.row].setView(view: cellView)
+            initView(product: products[indexPath.row], view: cellView)
         } else if let sliderViewCell = view as? SliderViewCell {
-            slider.connectTo(view: sliderViewCell)
+            slider.view = sliderViewCell
         }
 
         return view
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO
+        guard indexPath.section == 1 else {
+            return
+        }
+        selectItem(products: products, index: indexPath.row)
+    }
+}
+
+extension ProductsCollectionViewController: SliderDelegate {
+    func selectItem(products: [Product], index: Int) {
+        currProduct = products[index]
+        performSegue(withIdentifier: "CellToProductView", sender: products[index])
     }
 }
 
@@ -162,22 +196,56 @@ extension ProductsCollectionViewController: UISearchBarDelegate {
         sliderHidden = true
         
         //simple ineffective algorithm
-        cells = searchText == "" ?
+        products = searchText == "" ?
             [] :
-            products.filter { $0.product.title.range(of: searchText, options: .caseInsensitive) != nil}
+            catalog.products.filter {
+                $0.title.range(of: searchText, options: .caseInsensitive) != nil
+            }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        navigationController!.navigationBar.setItems([navigationItem], animated: true)
+        navigationController!.navigationBar.popItem(animated: true)
         searchBar.text = nil
-        updateSliderHidden()
-        cells = filterProducts(keys: catalog.productsIds)
+        
+        sliderHidden = slider.isHidden
+        products = catalog.tableProducts
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        (searchBar.value(forKey: "cancelButton") as! UIButton).isEnabled = true
+        cancelSearchButton.isEnabled = true
     }
 }
 
-
+extension ProductsCollectionViewController: CartDelegate {
+    private func setCartButtonEmptyImage() {
+        cartButton.setImage(
+            UIImage(
+                named: "cart_empty",
+                in: Bundle.main,
+                compatibleWith: cartButton.imageView?.traitCollection
+            ),
+            for: .normal
+        )
+        cartButton.setTitle(nil, for: .normal)
+    }
+    
+    private func setCartButtonImage() {
+        cartButton.setImage(
+            UIImage(
+                named: "cart",
+                in: Bundle.main,
+                compatibleWith: cartButton.imageView?.traitCollection
+            ),
+            for: .normal
+        )
+    }    
+    func updateProducts(count: Int) {
+        if count > 0 {
+            setCartButtonImage()
+            cartButton.setTitle("\r\n\r\n       \(count)", for: .normal)
+        } else {
+            setCartButtonEmptyImage()
+        }
+    }
+}

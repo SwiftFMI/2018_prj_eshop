@@ -9,39 +9,38 @@
 import Foundation
 import UIKit
 
-class SliderController: NSObject, UICollectionViewDataSource {
+class Slider: NSObject, UICollectionViewDataSource {
     
-    var cells: [ProductCell] = [] {
+    var delegate: SliderDelegate?
+    
+    var products: [Product] = [] {
         didSet {
             updatePageControlSize()
         }
     }
     
-    private weak var view: SliderViewCell! {
+    weak var view: SliderViewCell! {
         didSet {
-            view.productsView.dataSource = self
-            view.productsView.delegate = self
-            view.productsView.register(
-                UINib(nibName: cellsNames[1], bundle: nil),
-                forCellWithReuseIdentifier: reuseIdentifiers[1]
-            )
-            
-            updatePageControlSize()
+            if oldValue?.hashValue != view.hashValue {
+                view.productsView.dataSource = self
+                view.productsView.delegate = self
+                view.productsView.register(
+                    UINib(nibName: cellsNames[1], bundle: nil),
+                    forCellWithReuseIdentifier: reuseIdentifiers[1]
+                )
+                updatePageControlSize()
+            }
         }
     }
     
     private func updatePageControlSize() {
-        view?.pageControl.numberOfPages = cells.count
+        view?.pageControl.numberOfPages = products.count
     }
     
-    var notCells: Bool {
+    var isHidden: Bool {
         get {
-            return cells.isEmpty
+            return products.isEmpty
         }
-    }
-    
-    func connectTo(view: SliderViewCell) {
-        self.view = view
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -49,7 +48,7 @@ class SliderController: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cells.count
+        return products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -57,30 +56,31 @@ class SliderController: NSObject, UICollectionViewDataSource {
             withReuseIdentifier: reuseIdentifiers[1],
             for: indexPath
             ) as! ProductCollectionViewCell
-        
-        cells[indexPath.row].setView(view: cellView)
+        initView(product: products[indexPath.row], view: cellView)
         return cellView
     }
 }
 
-extension SliderController: UICollectionViewDelegateFlowLayout {
+extension Slider: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: ProductCollectionViewCell.height)
+        return CGSize(width: view.frame.size.width, height: ProductCollectionViewCell.height)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        view.pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        view.pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.size.width)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if view.pageControl.currentPage < indexPath.item {
-            view.pageControl.currentPage += 1
-        } else if view.pageControl.currentPage > indexPath.item {
-            view.pageControl.currentPage -= 1
+        let pageControl = view.pageControl!
+        
+        if pageControl.currentPage < indexPath.row {
+            pageControl.currentPage += 1
+        } else if pageControl.currentPage > indexPath.row {
+            pageControl.currentPage -= 1
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO
+        delegate?.selectItem(products: products, index: indexPath.row)
     }
 }

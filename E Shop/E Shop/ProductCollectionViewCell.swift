@@ -12,8 +12,6 @@ class ProductCollectionViewCell: UICollectionViewCell {
 
     static let height = CGFloat(150)
     
-    var product_id: String!
-    
     @IBOutlet weak var photoView: UIImageView!
     
     @IBOutlet weak var titleView: UILabel!
@@ -25,11 +23,14 @@ class ProductCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var priceView: UILabel!
+    @IBOutlet weak var priceView: UILabel! {
+        didSet{
+            priceView.textColor = green
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        backgroundColor = green
     }
-
 }

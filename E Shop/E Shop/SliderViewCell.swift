@@ -16,11 +16,14 @@ class SliderViewCell: UICollectionViewCell {
     
     @IBOutlet weak var productsView: UICollectionView!
     
-    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var pageControl: UIPageControl! {
+        didSet {
+            pageControl.currentPageIndicatorTintColor = green
+            pageControl.pageIndicatorTintColor = .gray
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
 }

@@ -22,6 +22,7 @@
 		CFB0C444221A1BE800DEFE55 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0C442221A1BE800DEFE55 /* ProductDetailViewController.swift */; };
 		CFB0C445221A1BE800DEFE55 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFB0C443221A1BE800DEFE55 /* ProductDetailViewController.xib */; };
 		CFC32B1821EF572E007001C5 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC32B1721EF572E007001C5 /* Catalog.swift */; };
+		E5154EA4221AF92A00A84E48 /* HamburgerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5154EA3221AF92A00A84E48 /* HamburgerMenuViewController.swift */; };
 		E594698921B6AA4F007A3CE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E594698821B6AA4F007A3CE8 /* AppDelegate.swift */; };
 		E594699021B6AA5A007A3CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E594698F21B6AA5A007A3CE8 /* Assets.xcassets */; };
 		E594699321B6AA5A007A3CE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E594699121B6AA5A007A3CE8 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		CFB0C442221A1BE800DEFE55 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		CFB0C443221A1BE800DEFE55 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		CFC32B1721EF572E007001C5 /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
+		E5154EA3221AF92A00A84E48 /* HamburgerMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerMenuViewController.swift; sourceTree = "<group>"; };
 		E594698521B6AA4F007A3CE8 /* E Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "E Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E594698821B6AA4F007A3CE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E594698F21B6AA5A007A3CE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */,
 				CF5A45352216197C00385CB9 /* titleImage.jpg */,
 				E594699421B6AA5A007A3CE8 /* Info.plist */,
+				E5154EA3221AF92A00A84E48 /* HamburgerMenuViewController.swift */,
 			);
 			path = "E Shop";
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				CF8149042218B80400EED500 /* SliderDelegate.swift in Sources */,
 				CF273CAA21F24E8E00C40D0C /* Utility.swift in Sources */,
 				E594698921B6AA4F007A3CE8 /* AppDelegate.swift in Sources */,
+				E5154EA4221AF92A00A84E48 /* HamburgerMenuViewController.swift in Sources */,
 				CF9457F9221337D000AAE4FD /* Slider.swift in Sources */,
 				CF273CA521F2331E00C40D0C /* ProductCollectionViewCell.swift in Sources */,
 				CF001D532216E68C00A4ADCE /* Cart.swift in Sources */,

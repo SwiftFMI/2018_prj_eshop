@@ -13,6 +13,12 @@ class Cart {
     
     private var nextOrderId = UInt(0)
     
+    private(set) var count = UInt(0) {
+        didSet {
+            delegate?.updateProducts(count: count)
+        }
+    }
+    
     private func defaultValue() -> (count: UInt, orderId: UInt) {
         nextOrderId += 1
         return (count: 0, orderId: nextOrderId)
@@ -24,12 +30,13 @@ class Cart {
         var value = productsDict[id, default: defaultValue()]
         value.count += 1
         productsDict[id] = value
-        delegate?.updateProducts(count: productsDict.count)
+        count += 1
     }
     
     func removeProduct(id: String) {
+        let (count, _) = productsDict[id]!
         productsDict[id] = nil
-        delegate?.updateProducts(count: productsDict.count)
+        self.count -= count
     }
     
     func decrementProductCount(id: String) {
@@ -38,10 +45,11 @@ class Cart {
             removeProduct(id: id)
         } else {
             productsDict[id]!.count = count - 1
+            self.count -= 1
         }
     }
     
-    var product: [(id: String, count: UInt)] {
+    var products: [(id: String, count: UInt)] {
         get {
             return productsDict.sorted { $0.value.orderId < $1.value.orderId}
                 .map {(id: $0.key, count: $0.value.count)}

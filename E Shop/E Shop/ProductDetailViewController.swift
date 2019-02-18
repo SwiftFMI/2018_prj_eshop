@@ -13,7 +13,7 @@ class ProductDetailViewController: UIViewController {
     
     var cart: Cart!
     
-    weak var cartBarButtonItem: UIBarButtonItem! {
+    var cartBarButtonItem: UIBarButtonItem! {
         didSet {
             navigationItem.setRightBarButton(cartBarButtonItem, animated: false)
         }

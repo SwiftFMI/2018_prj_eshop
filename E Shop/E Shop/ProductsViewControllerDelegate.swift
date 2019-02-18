@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol SliderDelegate {
+protocol ProductsViewControllerDelegate {
     func selectItem(products: [Product], index: Int)
 }

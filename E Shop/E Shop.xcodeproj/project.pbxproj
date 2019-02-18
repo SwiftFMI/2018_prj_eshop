@@ -15,10 +15,11 @@
 		CF59632321F1EB5B0011ADBD /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = CF59632221F1E7F70011ADBD /* catalog.json */; };
 		CF5A4536221619D800385CB9 /* titleImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CF5A45352216197C00385CB9 /* titleImage.jpg */; };
 		CF8149022218B12F00EED500 /* CartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8149012218B12F00EED500 /* CartDelegate.swift */; };
-		CF8149042218B80400EED500 /* SliderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8149032218B80400EED500 /* SliderDelegate.swift */; };
+		CF8149042218B80400EED500 /* ProductsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8149032218B80400EED500 /* ProductsViewControllerDelegate.swift */; };
 		CF8922CF21FB680A00EFDC24 /* SliderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */; };
 		CF8922D021FB680A00EFDC24 /* SliderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */; };
 		CF9457F9221337D000AAE4FD /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9457F8221337D000AAE4FD /* Slider.swift */; };
+		CFA4D316221B56BD001972EC /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA4D315221B56BD001972EC /* SearchCollectionViewController.swift */; };
 		CFB0C444221A1BE800DEFE55 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0C442221A1BE800DEFE55 /* ProductDetailViewController.swift */; };
 		CFB0C445221A1BE800DEFE55 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFB0C443221A1BE800DEFE55 /* ProductDetailViewController.xib */; };
 		CFC32B1821EF572E007001C5 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC32B1721EF572E007001C5 /* Catalog.swift */; };
@@ -38,10 +39,11 @@
 		CF59632221F1E7F70011ADBD /* catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
 		CF5A45352216197C00385CB9 /* titleImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = titleImage.jpg; sourceTree = "<group>"; };
 		CF8149012218B12F00EED500 /* CartDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDelegate.swift; sourceTree = "<group>"; };
-		CF8149032218B80400EED500 /* SliderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderDelegate.swift; sourceTree = "<group>"; };
+		CF8149032218B80400EED500 /* ProductsViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		CF8922CD21FB680A00EFDC24 /* SliderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderViewCell.swift; sourceTree = "<group>"; };
 		CF8922CE21FB680A00EFDC24 /* SliderViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderViewCell.xib; sourceTree = "<group>"; };
 		CF9457F8221337D000AAE4FD /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		CFA4D315221B56BD001972EC /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		CFB0C442221A1BE800DEFE55 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		CFB0C443221A1BE800DEFE55 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		CFC32B1721EF572E007001C5 /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				E594698821B6AA4F007A3CE8 /* AppDelegate.swift */,
 				E594698F21B6AA5A007A3CE8 /* Assets.xcassets */,
 				E594699121B6AA5A007A3CE8 /* Main.storyboard */,
+				CFA4D315221B56BD001972EC /* SearchCollectionViewController.swift */,
 				E594699A21B6AAB9007A3CE8 /* AppAssets.xcassets */,
 				E594699C21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets */,
 				CF8149012218B12F00EED500 /* CartDelegate.swift */,
@@ -97,7 +100,7 @@
 				CF001D522216E68C00A4ADCE /* Cart.swift */,
 				CF273CA921F24E8E00C40D0C /* Utility.swift */,
 				CF273CA721F236F600C40D0C /* ProductsCollectionViewController.swift */,
-				CF8149032218B80400EED500 /* SliderDelegate.swift */,
+				CF8149032218B80400EED500 /* ProductsViewControllerDelegate.swift */,
 				CF9457F8221337D000AAE4FD /* Slider.swift */,
 				CFC32B1721EF572E007001C5 /* Catalog.swift */,
 				CF59632221F1E7F70011ADBD /* catalog.json */,
@@ -190,7 +193,8 @@
 				CF273CA821F236F600C40D0C /* ProductsCollectionViewController.swift in Sources */,
 				CF8922CF21FB680A00EFDC24 /* SliderViewCell.swift in Sources */,
 				CF8149022218B12F00EED500 /* CartDelegate.swift in Sources */,
-				CF8149042218B80400EED500 /* SliderDelegate.swift in Sources */,
+				CFA4D316221B56BD001972EC /* SearchCollectionViewController.swift in Sources */,
+				CF8149042218B80400EED500 /* ProductsViewControllerDelegate.swift in Sources */,
 				CF273CAA21F24E8E00C40D0C /* Utility.swift in Sources */,
 				E594698921B6AA4F007A3CE8 /* AppDelegate.swift in Sources */,
 				CF9457F9221337D000AAE4FD /* Slider.swift in Sources */,

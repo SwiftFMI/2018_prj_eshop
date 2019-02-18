@@ -11,7 +11,7 @@ import UIKit
 
 class Slider: NSObject, UICollectionViewDataSource {
     
-    var delegate: SliderDelegate?
+    var delegate: ProductsViewControllerDelegate?
     
     var products: [Product] = [] {
         didSet {

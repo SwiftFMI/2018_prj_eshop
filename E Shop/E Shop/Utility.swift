@@ -21,30 +21,7 @@ func initView(product: Product, view: ProductCollectionViewCell) {
     }
 }
 
-func initView(product: Product, view: ProductDetailView) {
-    view.titleView.text = product.title
-    view.priceView.text = "$" + product.price + " "
-    view.colorView.text = product.color
-    view.conditionView.text = product.condition
-    initImageView(product: product, view: view, index: 0)
-}
-
-func initImageView(product: Product, view: ProductDetailView, index: Int) {
-    guard let imageView = view.imageView, index < product.images.count else {
-        return
-    }
-    imageView.accessibilityIdentifier = nil
-    imageView.image = product.images[index].image
-    
-    if imageView.image == nil {
-        view.spinner.startAnimating()
-        loadImage(view: view.imageView, product: product, imageIndex: 0) { [weak spinner = view.spinner] in
-            spinner?.stopAnimating()
-        }
-    }
-}
-
-private func loadImage(view: UIImageView, product: Product, imageIndex: Int, completion: (() -> Void)?) {
+func loadImage(view: UIImageView, product: Product, imageIndex: Int, completion: (() -> Void)?) {
     let resource = product.images[imageIndex].resource
     
     if let image = UIImage(named: resource, in: Bundle.main, compatibleWith: view.traitCollection) {
@@ -61,6 +38,7 @@ private func loadImage(view: UIImageView, product: Product, imageIndex: Int, com
                 
                 if let view = view, view.accessibilityIdentifier == resource, view.image == nil {
                     view.image = image
+                    completion?()
                     view.setNeedsDisplay()
                 }
             }

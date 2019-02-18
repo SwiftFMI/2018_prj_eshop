@@ -12,8 +12,6 @@ let cart = Cart()
 
 var catalog: Catalog!
 
-var currProduct: Product!
-
 let green = UIColor(displayP3Red: 132.0/255.0, green: 191.0/255.0, blue: 37.0/255.0, alpha: 1.0)
 
 let cellsNames = ["SliderViewCell", "ProductCollectionViewCell"]
@@ -39,7 +37,6 @@ class ProductsCollectionViewController: UICollectionViewController {
         }
     }
     
-    //private let productViewController = ProductDetailViewController()
     
     private var searchBar: UISearchBar {
         get {
@@ -74,6 +71,11 @@ class ProductsCollectionViewController: UICollectionViewController {
             collectionView.reloadSections(IndexSet(1...1))
         }
     }
+    
+    private lazy var productViewController = ProductDetailViewController(
+        nibName: "ProductDetailViewController",
+        bundle: nil
+    )
     
     @IBOutlet weak var spinner: UIActivityIndicatorView! {
         didSet {
@@ -131,13 +133,18 @@ class ProductsCollectionViewController: UICollectionViewController {
         }
     }
     
+    private func config(navigationBar: UINavigationBar) {
+        navigationBar.tintColor = .white
+        navigationBar.barTintColor = green
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cart.delegate = self
         slider.delegate = self
         loadCatalog()
         loadTitleImage()
-        navigationController!.navigationBar.barTintColor = green
+        config(navigationBar: navigationController!.navigationBar)
         registerCells()
     }
 
@@ -177,8 +184,10 @@ class ProductsCollectionViewController: UICollectionViewController {
 
 extension ProductsCollectionViewController: SliderDelegate {
     func selectItem(products: [Product], index: Int) {
-        currProduct = products[index]
-        performSegue(withIdentifier: "CellToProductView", sender: products[index])
+        productViewController.product = products[index]
+        productViewController.cart = cart
+        productViewController.cartBarButtonItem = navigationItem.rightBarButtonItems![0]
+        navigationController!.pushViewController(productViewController, animated: true)
     }
 }
 

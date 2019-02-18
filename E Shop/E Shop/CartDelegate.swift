@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CartDelegate {
-    func updateProducts(count: Int)
+    func updateProducts(count: UInt)
 }

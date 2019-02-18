@@ -250,12 +250,14 @@
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="CartButton" image="cart_empty" style="done" id="qIc-cx-iXd">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="9ur-74-S7y">
-                                    <rect key="frame" x="327" y="5" width="32" height="34"/>
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="clip" id="9ur-74-S7y">
+                                    <rect key="frame" x="327" y="6" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal">
-                                        <attributedString key="attributedTitle"/>
+                                    <inset key="titleEdgeInsets" minX="3" minY="6" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="    00" backgroundImage="cart">
+                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                 </button>
                             </barButtonItem>
@@ -287,6 +289,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cart" width="32" height="32"/>
         <image name="cart_empty" width="32" height="32"/>
         <image name="menu_arrow_down" width="21" height="21"/>
         <image name="menu_drawer" width="24" height="24"/>

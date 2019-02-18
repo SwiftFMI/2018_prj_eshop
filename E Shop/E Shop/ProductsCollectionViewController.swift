@@ -228,7 +228,7 @@ extension ProductsCollectionViewController: UISearchBarDelegate {
 
 extension ProductsCollectionViewController: CartDelegate {
     private func setCartButtonEmptyImage() {
-        cartButton.setImage(
+        cartButton.setBackgroundImage(
             UIImage(
                 named: "cart_empty",
                 in: Bundle.main,
@@ -240,7 +240,7 @@ extension ProductsCollectionViewController: CartDelegate {
     }
     
     private func setCartButtonImage() {
-        cartButton.setImage(
+        cartButton.setBackgroundImage(
             UIImage(
                 named: "cart",
                 in: Bundle.main,
@@ -248,13 +248,18 @@ extension ProductsCollectionViewController: CartDelegate {
             ),
             for: .normal
         )
-    }    
-    func updateProducts(count: Int) {
-        if count > 0 {
+    }
+    
+    func updateProducts(count: UInt) {
+        if count > 0 && cartButton.currentTitle == nil {
             setCartButtonImage()
-            cartButton.setTitle("\r\n\r\n       \(count)", for: .normal)
-        } else {
+        } else if count == 0 && cartButton.currentTitle != nil {
             setCartButtonEmptyImage()
+        }
+        
+        if count > 0 {
+            let title = (count < 10 ? " " : "") + "   \(count)"
+            cartButton.setTitle(title, for: .normal)
         }
     }
 }

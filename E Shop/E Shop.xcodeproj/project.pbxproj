@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5154B94D221C9CA600F3643E /* CartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5154B94B221C9CA600F3643E /* CartViewCell.swift */; };
+		5154B94E221C9CA600F3643E /* CartViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5154B94C221C9CA600F3643E /* CartViewCell.xib */; };
 		CF001D532216E68C00A4ADCE /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF001D522216E68C00A4ADCE /* Cart.swift */; };
 		CF273CA521F2331E00C40D0C /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF273CA321F2331D00C40D0C /* ProductCollectionViewCell.swift */; };
 		CF273CA621F2331E00C40D0C /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF273CA421F2331D00C40D0C /* ProductCollectionViewCell.xib */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5154B94B221C9CA600F3643E /* CartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewCell.swift; sourceTree = "<group>"; };
+		5154B94C221C9CA600F3643E /* CartViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartViewCell.xib; sourceTree = "<group>"; };
 		CF001D522216E68C00A4ADCE /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		CF273CA321F2331D00C40D0C /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		CF273CA421F2331D00C40D0C /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 			children = (
 				CF273CA321F2331D00C40D0C /* ProductCollectionViewCell.swift */,
 				CF273CA421F2331D00C40D0C /* ProductCollectionViewCell.xib */,
+				5154B94B221C9CA600F3643E /* CartViewCell.swift */,
+				5154B94C221C9CA600F3643E /* CartViewCell.xib */,
 				E594698821B6AA4F007A3CE8 /* AppDelegate.swift */,
 				E594698F21B6AA5A007A3CE8 /* Assets.xcassets */,
 				E594699121B6AA5A007A3CE8 /* Main.storyboard */,
@@ -177,6 +183,7 @@
 				CF59632321F1EB5B0011ADBD /* catalog.json in Resources */,
 				CF5A4536221619D800385CB9 /* titleImage.jpg in Resources */,
 				E594699D21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets in Resources */,
+				5154B94E221C9CA600F3643E /* CartViewCell.xib in Resources */,
 				CF273CA621F2331E00C40D0C /* ProductCollectionViewCell.xib in Resources */,
 				CFB0C445221A1BE800DEFE55 /* ProductDetailViewController.xib in Resources */,
 				CF8922D021FB680A00EFDC24 /* SliderViewCell.xib in Resources */,
@@ -194,6 +201,7 @@
 			files = (
 				CFC32B1821EF572E007001C5 /* Catalog.swift in Sources */,
 				CF273CA821F236F600C40D0C /* ProductsCollectionViewController.swift in Sources */,
+				5154B94D221C9CA600F3643E /* CartViewCell.swift in Sources */,
 				CF8922CF21FB680A00EFDC24 /* SliderViewCell.swift in Sources */,
 				CF8149022218B12F00EED500 /* CartDelegate.swift in Sources */,
 				CFA4D316221B56BD001972EC /* SearchCollectionViewController.swift in Sources */,

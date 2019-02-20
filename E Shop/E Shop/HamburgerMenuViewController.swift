@@ -2,8 +2,25 @@
 //  HamburgerMenuViewController.swift
 //  E Shop
 //
-//  Created by grade on 18.02.19.
+//  Created by Mihail Luhov and Julian Stoev on 18.02.19.
 //  Copyright © 2019 teameshop. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class HamburgerMenuViewController : UICollectionViewController
+{
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    var catalog : Catalog!
+}
+

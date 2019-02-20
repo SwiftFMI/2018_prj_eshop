@@ -105,6 +105,14 @@ class ProductsCollectionViewController: UICollectionViewController {
         cartViewController.setModel(cart: cart, catalog: catalog)
         navigationController!.pushViewController(cartViewController, animated: true)
     }
+    
+    @IBAction func willAppearHamburgerMenu() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let hamburgerMenuViewController = storyboard.instantiateViewController(withIdentifier: "HamburgerMenuViewController") as! HamburgerMenuViewController
+        hamburgerMenuViewController.catalog = catalog
+        navigationController!.pushViewController(hamburgerMenuViewController, animated: true)
+    }
+    
 //
 //    func initViewController(_ viewController: SearchCollectionViewController) {
 //        viewController.catalog = catalog

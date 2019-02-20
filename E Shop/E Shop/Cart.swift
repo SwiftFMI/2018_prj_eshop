@@ -24,35 +24,40 @@ class Cart {
         return (count: 0, orderId: nextOrderId)
     }
     
-    private var productsDict = Dictionary<String, (count: UInt, orderId: UInt)>()
+    private var products = Dictionary<String, (count: UInt, orderId: UInt)>()
     
     func addProduct(id: String) {
-        var value = productsDict[id, default: defaultValue()]
+        var value = products[id, default: defaultValue()]
         value.count += 1
-        productsDict[id] = value
+        products[id] = value
         count += 1
     }
     
     func removeProduct(id: String) {
-        let (count, _) = productsDict[id]!
-        productsDict[id] = nil
+        let (count, _) = products[id] ?? (0, 0)
+        products[id] = nil
         self.count -= count
     }
     
     func decrementProductCount(id: String) {
-        let (count, _) = productsDict[id]!
+        guard let (count, _) = products[id] else{
+            return
+        }
         if count == 1 {
             removeProduct(id: id)
         } else {
-            productsDict[id]!.count = count - 1
+            products[id]!.count = count - 1
             self.count -= 1
         }
     }
     
-    var products: [(id: String, count: UInt)] {
+    subscript(id: String) -> UInt {
+        return products[id]?.count ?? 0
+    }
+    
+    var productsId: [String] {
         get {
-            return productsDict.sorted { $0.value.orderId < $1.value.orderId}
-                .map {(id: $0.key, count: $0.value.count)}
+            return products.sorted { $0.value.orderId < $1.value.orderId} .map {$0.key}
         }
     }
 }

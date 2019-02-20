@@ -14,25 +14,11 @@ final class Catalog: Decodable {
     let sliderProducts: [Product]
     let tableProducts: [Product]
     let products: [Product]
+    private let productsDictionary: [String: Int]
     
-//    var productsIds: [String] {
-//        get {
-//            return Array(products.keys)
-//        }
-//    }
-//
-//    var sliderIds: [String] {
-//        get {
-//            return Array(slider.keys)
-//        }
-//    }
-//
-//    func getProduct(id: String) -> Product? {
-//        if let index = products[id] ?? slider[id] {
-//            return all_products[index]
-//        }
-//        return nil
-//    }
+    subscript(product_id: String) -> Product {
+        return products[productsDictionary[product_id]!]
+    }
     
     enum MyStructKeys: String, CodingKey {
         case categories
@@ -46,6 +32,9 @@ final class Catalog: Decodable {
         sliderProducts = try container.decode([Product].self, forKey: .slider)
         tableProducts = try container.decode([Product].self, forKey: .products)
         products = sliderProducts + tableProducts
+        productsDictionary = Dictionary(
+            uniqueKeysWithValues: zip(products.map {($0.id)}, 0..<products.count)
+        )
     }
 }
 

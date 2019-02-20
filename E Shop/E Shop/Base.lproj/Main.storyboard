@@ -235,7 +235,7 @@
                             </button>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="CartButton" image="cart_empty" style="done" id="qIc-cx-iXd">
+                            <barButtonItem title="CartButton" style="done" id="qIc-cx-iXd">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="clip" id="9ur-74-S7y">
                                     <rect key="frame" x="327" y="6" width="32" height="32"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -245,6 +245,9 @@
                                     <state key="normal" title="    00" backgroundImage="cart">
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="willAppearCart" destination="uL0-jT-UAs" eventType="touchUpInside" id="WsW-PH-A4e"/>
+                                    </connections>
                                 </button>
                             </barButtonItem>
                             <barButtonItem title="SearchButton" style="done" id="Ndy-cN-Vj0" userLabel="Search">
@@ -316,10 +319,49 @@
             </objects>
             <point key="canvasLocation" x="2070" y="-36"/>
         </scene>
+        <!--Cart View Controller-->
+        <scene sceneID="WRW-jg-SlQ">
+            <objects>
+                <collectionViewController storyboardIdentifier="CartViewController" id="IV9-bc-7cB" customClass="CartViewController" customModule="E_Shop" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="qco-tW-Ct5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fQ8-ie-GcS">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="10"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="IV9-bc-7cB" id="DBG-hN-Pia"/>
+                            <outlet property="delegate" destination="IV9-bc-7cB" id="hcd-S8-iiR"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="XeK-eZ-snE"/>
+                    <connections>
+                        <outlet property="checkoutButton" destination="4d3-Mb-SJz" id="v5D-V9-tRe"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WBd-91-AZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" id="4d3-Mb-SJz">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
+                    <state key="normal" title="Checkout">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="checkout" destination="IV9-bc-7cB" eventType="touchUpInside" id="ZZc-h0-S1P"/>
+                    </connections>
+                </button>
+            </objects>
+            <point key="canvasLocation" x="1442" y="731"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cart" width="32" height="32"/>
-        <image name="cart_empty" width="32" height="32"/>
         <image name="menu_arrow_down" width="21" height="21"/>
         <image name="menu_drawer" width="24" height="24"/>
         <image name="menu_plus" width="24" height="24"/>

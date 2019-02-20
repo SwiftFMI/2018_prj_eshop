@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let reuseIdentifiers = ["ProductCollectionViewCell"]
+
 class SearchCollectionViewController: UICollectionViewController {
     @IBOutlet var searchBar: UISearchBar! {
         didSet {
@@ -42,10 +44,12 @@ class SearchCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
-        collectionView.register(
-            UINib(nibName: cellsNames[1], bundle: nil),
-            forCellWithReuseIdentifier: reuseIdentifiers[1]
-        )
+        reuseIdentifiers.forEach {
+            collectionView.register(
+                UINib(nibName: $0, bundle: nil),
+                forCellWithReuseIdentifier: $0
+            )
+        }
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -58,7 +62,7 @@ class SearchCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellView = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifiers[1],
+            withReuseIdentifier: reuseIdentifiers[0],
             for: indexPath
             ) as! ProductCollectionViewCell
         initView(product: products[indexPath.row], view: cellView)

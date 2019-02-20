@@ -14,9 +14,7 @@ var catalog: Catalog!
 
 let green = UIColor(displayP3Red: 132.0/255.0, green: 191.0/255.0, blue: 37.0/255.0, alpha: 1.0)
 
-let cellsNames = ["SliderViewCell", "ProductCollectionViewCell"]
-
-let reuseIdentifiers = ["Slider", "Cell"]
+private let reuseIdentifiers = ["SliderViewCell", "ProductCollectionViewCell"]
 
 private let catalogUrl = Bundle.main.url(forResource: "catalog", withExtension: "json")!
 private let titleImageUrl = Bundle.main.url(forResource: "titleImage", withExtension: "jpg")!
@@ -101,19 +99,17 @@ class ProductsCollectionViewController: UICollectionViewController {
         navigationController!.pushViewController(searchViewController, animated: true)
     }
     
-    func initViewController(_ viewController: SearchCollectionViewController) {
-        viewController.catalog = catalog
-        viewController.delegate = self
+    @IBAction func willAppearCart() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let cartViewController = storyboard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+        cartViewController.setModel(cart: cart, catalog: catalog)
+        navigationController!.pushViewController(cartViewController, animated: true)
     }
-    
-    private func registerCells() {
-        for (name, id) in zip(cellsNames, reuseIdentifiers) {
-            collectionView.register(
-                UINib(nibName: name, bundle: nil),
-                forCellWithReuseIdentifier: id
-            )
-        }
-    }
+//
+//    func initViewController(_ viewController: SearchCollectionViewController) {
+//        viewController.catalog = catalog
+//        viewController.delegate = self
+//    }
     
     private func config(navigationBar: UINavigationBar) {
         navigationBar.tintColor = .white
@@ -123,13 +119,19 @@ class ProductsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reuseIdentifiers.forEach {
+            collectionView.register(
+                UINib(nibName: $0, bundle: nil),
+                forCellWithReuseIdentifier: $0
+            )
+        }
+        
         cart.delegate = self
         slider.delegate = self
         
         loadCatalog()
         loadTitleImage()
         config(navigationBar: navigationController!.navigationBar)
-        registerCells()
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

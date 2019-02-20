@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+private let reuseIdentifiers = ["ProductCollectionViewCell"]
+
 class Slider: NSObject, UICollectionViewDataSource {
     
     var delegate: ProductsViewControllerDelegate?
@@ -24,10 +26,12 @@ class Slider: NSObject, UICollectionViewDataSource {
             if oldValue?.hashValue != view.hashValue {
                 view.productsView.dataSource = self
                 view.productsView.delegate = self
-                view.productsView.register(
-                    UINib(nibName: cellsNames[1], bundle: nil),
-                    forCellWithReuseIdentifier: reuseIdentifiers[1]
-                )
+                reuseIdentifiers.forEach {
+                    view.productsView.register(
+                        UINib(nibName: $0, bundle: nil),
+                        forCellWithReuseIdentifier: $0
+                    )
+                }
                 updatePageControlSize()
             }
         }
@@ -53,7 +57,7 @@ class Slider: NSObject, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellView = collectionView.dequeueReusableCell(
-            withReuseIdentifier: reuseIdentifiers[1],
+            withReuseIdentifier: reuseIdentifiers[0],
             for: indexPath
             ) as! ProductCollectionViewCell
         initView(product: products[indexPath.row], view: cellView)

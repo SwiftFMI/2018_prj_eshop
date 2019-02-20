@@ -67,11 +67,12 @@ class Slider: NSObject, UICollectionViewDataSource {
 
 extension Slider: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width, height: ProductCollectionViewCell.height)
+        //return CGSize(width: view.frame.size.width, height: ProductCollectionViewCell.height)
+        return CGSize(width: 350, height: ProductCollectionViewCell.height)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        view.pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.size.width)
+        view.pageControl.currentPage = Int((scrollView.contentOffset.x / 350).rounded())
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

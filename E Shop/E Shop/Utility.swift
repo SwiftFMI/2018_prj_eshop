@@ -22,6 +22,8 @@ func loadFirstImage(view: UIImageView, product: Product, completion: (() -> Void
     
     if product.images.first?.image == nil && !product.images.isEmpty {
         loadImage(view: view, product: product, imageIndex: 0, completion: completion)
+    } else {
+        completion?()
     }
 }
 

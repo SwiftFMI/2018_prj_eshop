@@ -99,7 +99,9 @@ class CartViewController: UICollectionViewController {
         model.cart.removeProduct(id: productsId[indexPath.row])
         productsId.remove(at: indexPath.row)
         //collectionView.deleteItems(at: [indexPath])
-        collectionView.reloadData()
+        collectionView.performBatchUpdates( { [weak self] in
+            self?.collectionView.reloadData()
+        })
     }
     
     private func initView(indexPath: IndexPath, view: CartViewProductCell) {

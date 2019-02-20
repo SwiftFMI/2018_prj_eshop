@@ -13,20 +13,25 @@ func initView(product: Product, view: ProductCollectionViewCell) {
     view.titleView.text = product.title
     view.descriptionView.text = product.description
     view.priceView.text = "$" + product.price + " "
-    view.photoView.accessibilityIdentifier = nil
-    view.photoView.image = product.images.first?.image
+    loadFirstImage(view: view.photoView, product: product)
+}
+
+func loadFirstImage(view: UIImageView, product: Product, completion: (() -> Void)? = nil) {
+    view.accessibilityIdentifier = nil
+    view.image = product.images.first?.image
     
     if product.images.first?.image == nil && !product.images.isEmpty {
-        loadImage(view: view.photoView, product: product, imageIndex: 0, completion: nil)
+        loadImage(view: view, product: product, imageIndex: 0, completion: completion)
     }
 }
 
-func loadImage(view: UIImageView, product: Product, imageIndex: Int, completion: (() -> Void)?) {
+func loadImage(view: UIImageView, product: Product, imageIndex: Int, completion: (() -> Void)? = nil) {
     let resource = product.images[imageIndex].resource
     
     if let image = UIImage(named: resource, in: Bundle.main, compatibleWith: view.traitCollection) {
         view.image = image
         product.images[imageIndex].image = image
+        completion?()
     } else if let url = URL(string: resource) {
         view.accessibilityIdentifier = resource
         DispatchQueue.global(qos: .userInitiated).async { [weak view, weak product] in
@@ -43,6 +48,8 @@ func loadImage(view: UIImageView, product: Product, imageIndex: Int, completion:
                 }
             }
         }
+    } else {
+        completion?()
     }
 }
 

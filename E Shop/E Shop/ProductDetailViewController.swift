@@ -68,21 +68,10 @@ class ProductDetailViewController: UIViewController {
         priceView.text = "$" + product.price
         colorView.text = product.color
         conditionView.text = product.condition
-        initImageView(index: 0)
-    }
-    
-    private func initImageView(index: Int) {
-        guard index < product.images.count else {
-            return
-        }
-        imageView.accessibilityIdentifier = nil
-        imageView.image = product.images[index].image
         
-        if imageView.image == nil {
-            spinner.startAnimating()
-            loadImage(view: imageView, product: product, imageIndex: 0) { [weak spinner = self.spinner] in
-                spinner?.stopAnimating()
-            }
+        spinner?.startAnimating()
+        loadFirstImage(view: imageView, product: product) { [weak self] in
+            self?.spinner?.stopAnimating()
         }
     }
 }

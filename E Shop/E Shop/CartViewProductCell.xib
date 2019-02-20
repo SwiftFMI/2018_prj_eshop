@@ -69,24 +69,11 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thk-48-Raf">
-                        <rect key="frame" x="275" y="60" width="60" height="30"/>
-                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="0ST-5j-mH0"/>
-                            <constraint firstAttribute="width" constant="60" id="xPq-ZB-34h"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="Remove">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="KDG-fq-MmX" firstAttribute="height" secondItem="SwW-2h-Z0r" secondAttribute="height" id="0Kj-fR-dkn"/>
-                <constraint firstItem="Thk-48-Raf" firstAttribute="centerY" secondItem="KDG-fq-MmX" secondAttribute="centerY" id="29I-RZ-Lvk"/>
                 <constraint firstItem="KDG-fq-MmX" firstAttribute="leading" secondItem="OOr-He-fOo" secondAttribute="trailing" id="4A4-aw-R2B"/>
                 <constraint firstAttribute="bottom" secondItem="SwW-2h-Z0r" secondAttribute="bottom" constant="10" id="73N-zw-K9e"/>
                 <constraint firstItem="XeX-Lh-ONY" firstAttribute="leading" secondItem="SwW-2h-Z0r" secondAttribute="trailing" id="7LQ-nw-TFd"/>
@@ -101,7 +88,6 @@
                 <constraint firstItem="XeX-Lh-ONY" firstAttribute="height" secondItem="SwW-2h-Z0r" secondAttribute="height" id="Q7x-GK-gCG"/>
                 <constraint firstItem="SwW-2h-Z0r" firstAttribute="top" secondItem="Q0L-ZG-c4v" secondAttribute="bottom" id="R69-jR-b0i"/>
                 <constraint firstItem="Q0L-ZG-c4v" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="31" id="Wbh-Mm-7rv"/>
-                <constraint firstItem="Thk-48-Raf" firstAttribute="leading" secondItem="KDG-fq-MmX" secondAttribute="leading" id="aDp-rR-7Ia"/>
                 <constraint firstAttribute="bottom" secondItem="OOr-He-fOo" secondAttribute="bottom" id="aZO-6w-qQ2"/>
                 <constraint firstAttribute="trailing" secondItem="XeX-Lh-ONY" secondAttribute="trailing" constant="10" id="aqP-Ku-74Z"/>
                 <constraint firstItem="XeX-Lh-ONY" firstAttribute="width" secondItem="SwW-2h-Z0r" secondAttribute="width" id="bop-Iy-9pC"/>
@@ -118,7 +104,6 @@
                 <outlet property="minusButton" destination="KDG-fq-MmX" id="3Qj-kC-rbI"/>
                 <outlet property="plusButton" destination="XeX-Lh-ONY" id="mBR-u9-HdN"/>
                 <outlet property="priceView" destination="OOr-He-fOo" id="aqZ-Dt-A2c"/>
-                <outlet property="removeButton" destination="Thk-48-Raf" id="Qca-c1-O2Y"/>
                 <outlet property="titleView" destination="kYU-YR-SuB" id="lHb-hc-4ln"/>
             </connections>
             <point key="canvasLocation" x="53.600000000000001" y="136.73163418290855"/>

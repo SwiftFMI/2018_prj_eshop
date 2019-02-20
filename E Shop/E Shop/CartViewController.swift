@@ -25,14 +25,14 @@ class CartViewController: UICollectionViewController {
         }
     }
     
-    private func removeProduct(indexPath: IndexPath, id: String) {
-        guard indexPath.row < productsId.count, productsId[indexPath.row] == id else {
-            return
-        }
-        model.cart.removeProduct(id: productsId[indexPath.row])
-        productsId.remove(at: indexPath.row)
-        collectionView.reloadData()
-    }
+//    private func removeProduct(indexPath: IndexPath, id: String) {
+//        guard indexPath.row < productsId.count, productsId[indexPath.row] == id else {
+//            return
+//        }
+//        model.cart.removeProduct(id: productsId[indexPath.row])
+//        productsId.remove(at: indexPath.row)
+//        collectionView.reloadData()
+//    }
     
     private func reloadAfterCountUpdate(indexPath: IndexPath) {
         collectionView.reloadItems(at: [indexPath])
@@ -95,31 +95,29 @@ class CartViewController: UICollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+        model.cart.removeProduct(id: productsId[indexPath.row])
+        productsId.remove(at: indexPath.row)
+        //collectionView.deleteItems(at: [indexPath])
+        collectionView.reloadData()
+    }
+    
     private func initView(indexPath: IndexPath, view: CartViewProductCell) {
         let index = indexPath.row
         let id = productsId[index]
         let product = model.catalog[id]
         let count = model.cart[id]
-        
-        view.removeButton.addAction(for: .touchUpInside) { [weak self] in
-            self?.removeProduct(indexPath: indexPath, id: id)
-        }
         view.plusButton.addAction(for: .touchUpInside) { [weak self] in
             self?.addProduct(indexPath: indexPath, id: id)
         }
         view.minusButton.addAction(for: .touchUpInside) { [weak self] in
             self?.decrementProductCount(indexPath: indexPath, id: id)
         }
-        view.removeButton.isHidden = count != 0
         view.minusButton.isHidden = count == 0
         view.countView.text = String(count)
         view.titleView.text = product.title
         view.priceView.text = "$" + product.price
-        view.imageView.image = product.images.first?.image
-        
-        if product.images.first?.image == nil && !product.images.isEmpty {
-            loadImage(view: view.imageView, product: product, imageIndex: 0, completion: nil)
-        }
+        loadFirstImage(view: view.imageView, product: product)
     }
     
     private func initView(view: CartSummaryCollectionViewCell) {

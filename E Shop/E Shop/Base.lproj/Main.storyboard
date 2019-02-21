@@ -383,6 +383,41 @@
             </objects>
             <point key="canvasLocation" x="2070" y="-36"/>
         </scene>
+        <!--Order View Controller-->
+        <scene sceneID="ojD-1K-Luf">
+            <objects>
+                <collectionViewController storyboardIdentifier="OrderViewController" id="Mmh-yz-ivh" customClass="OrderViewController" customModule="E_Shop" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="d9X-Ld-W8r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="vJP-LR-XC8">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="tI9-CQ-08M">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Mmh-yz-ivh" id="HA2-pd-chl"/>
+                            <outlet property="delegate" destination="Mmh-yz-ivh" id="oOq-Ta-jof"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="rHE-dL-ZKL"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tcq-gg-120" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3161" y="-50"/>
+        </scene>
         <!--Cart View Controller-->
         <scene sceneID="WRW-jg-SlQ">
             <objects>

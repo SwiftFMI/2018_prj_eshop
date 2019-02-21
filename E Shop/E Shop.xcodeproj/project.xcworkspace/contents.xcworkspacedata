@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/danielurumov/Documents/2018_prj_eshop/E Shop/E Shop/E Shop-Bridge-Header.h">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

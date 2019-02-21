@@ -161,7 +161,6 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             isHiddenCountsView = flag
             UIView.animate(withDuration: 0.5) {
                 self.setNeedsLayout()
-                self.layoutIfNeeded()
             }
         }
     }

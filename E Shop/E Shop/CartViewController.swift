@@ -19,20 +19,23 @@ class CartViewController: UICollectionViewController {
         }
     }
     
+    private var cart: Cart {
+        get {
+            return model.cart
+        }
+    }
+    
+    private var catalog: Catalog {
+        get {
+            return model.catalog
+        }
+    }
+    
     private var productsId: [String] = [] {
         didSet {
             collectionView.reloadData()
         }
     }
-    
-//    private func removeProduct(indexPath: IndexPath, id: String) {
-//        guard indexPath.row < productsId.count, productsId[indexPath.row] == id else {
-//            return
-//        }
-//        model.cart.removeProduct(id: productsId[indexPath.row])
-//        productsId.remove(at: indexPath.row)
-//        collectionView.reloadData()
-//    }
     
     private func reloadAfterCountUpdate(indexPath: IndexPath) {
         collectionView.reloadItems(at: [indexPath])
@@ -43,7 +46,7 @@ class CartViewController: UICollectionViewController {
         guard indexPath.row < productsId.count, productsId[indexPath.row] == id else {
             return
         }
-        model.cart.addProduct(id: productsId[indexPath.row])
+        cart.addProduct(id: productsId[indexPath.row])
         reloadAfterCountUpdate(indexPath: indexPath)
     }
     
@@ -51,12 +54,12 @@ class CartViewController: UICollectionViewController {
         guard indexPath.row < productsId.count, productsId[indexPath.row] == id else {
             return
         }
-        model.cart.decrementProductCount(id: productsId[indexPath.row])
+        cart.decrementProductCount(id: productsId[indexPath.row])
         reloadAfterCountUpdate(indexPath: indexPath)
     }
     
     func setModel(cart: Cart, catalog: Catalog) {
-        self.model = (cart, catalog)
+        model = (cart, catalog)
     }
     
     override func viewDidLoad() {
@@ -73,7 +76,13 @@ class CartViewController: UICollectionViewController {
     }
     
     @IBAction func checkout() {
-        
+        guard cart.isEmpty == false else {
+            return
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let orderViewController = storyboard.instantiateViewController(withIdentifier: "OrderViewController") as! OrderViewController
+        orderViewController.setModel(cart: cart, catalog: catalog)
+        navigationController!.pushViewController(orderViewController, animated: true)
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -96,7 +105,7 @@ class CartViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-        model.cart.removeProduct(id: productsId[indexPath.row])
+        cart.removeProduct(id: productsId[indexPath.row])
         productsId.remove(at: indexPath.row)
         //collectionView.deleteItems(at: [indexPath])
         collectionView.performBatchUpdates( { [weak self] in
@@ -107,8 +116,8 @@ class CartViewController: UICollectionViewController {
     private func initView(indexPath: IndexPath, view: CartViewProductCell) {
         let index = indexPath.row
         let id = productsId[index]
-        let product = model.catalog[id]
-        let count = model.cart[id]
+        let product = catalog[id]
+        let count = cart[id]
         view.plusButton.addAction(for: .touchUpInside) { [weak self] in
             self?.addProduct(indexPath: indexPath, id: id)
         }
@@ -123,7 +132,7 @@ class CartViewController: UICollectionViewController {
     }
     
     private func initView(view: CartSummaryCollectionViewCell) {
-        let totalPrice = model.cart.totalPrice(catalog: model.catalog)
+        let totalPrice = cart.totalPrice(catalog: catalog)
         let vat = UInt(Float(totalPrice) * 0.2)
         view.savedView.text = "$0.0"
         view.vatView.text = vat.toPrice

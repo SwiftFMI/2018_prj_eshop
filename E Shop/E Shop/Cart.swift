@@ -19,6 +19,18 @@ class Cart {
         }
     }
     
+    var productKindsCount: Int {
+        get {
+            return products.count
+        }
+    }
+    
+    var isEmpty: Bool {
+        get {
+            return products.isEmpty
+        }
+    }
+    
     private func defaultValue() -> (count: UInt, orderId: UInt) {
         nextOrderId += 1
         return (count: 0, orderId: nextOrderId)

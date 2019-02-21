@@ -205,6 +205,7 @@ extension ProductsCollectionViewController: CartDelegate {
             for: .normal
         )
         cartButton.setTitle(nil, for: .normal)
+        cartButton.isEnabled = false
     }
     
     private func setCartButtonImage() {
@@ -216,6 +217,7 @@ extension ProductsCollectionViewController: CartDelegate {
             ),
             for: .normal
         )
+        cartButton.isEnabled = true
     }
     
     func updateProducts(count: UInt) {

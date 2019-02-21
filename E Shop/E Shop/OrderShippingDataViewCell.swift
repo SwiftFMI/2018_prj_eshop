@@ -26,4 +26,17 @@ class OrderShippingDataViewCell: UICollectionViewCell {
             sendOrderButton.backgroundColor = green
         }
     }
+    
+    @IBOutlet weak var headerTextView: UILabel! {
+        didSet {
+            setHeaderText()
+        }
+    }
+    
+    func setHeaderText(
+        _ text: String = "Please fill your personal information:",
+        color: UIColor = .black) {
+        headerTextView.textColor = color
+        headerTextView.text = text
+    }
 }

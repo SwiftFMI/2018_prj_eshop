@@ -55,6 +55,17 @@ func loadImage(view: UIImageView, product: Product, imageIndex: Int, completion:
     }
 }
 
+func initView(productId: String, view: OrderProductViewCell, cart: Cart, catalog: Catalog) {
+    let product = catalog[productId]
+    view.titleView.text = product.title
+    view.priceView.text = "$" + product.price
+    view.countView.text = "\(cart[productId])x"
+}
+
+func initView(view: OrderTotalViewCell, cart: Cart, catalog: Catalog) {
+    view.priceView.text = cart.totalPrice(catalog: catalog).toPrice
+}
+
 extension UInt {
     var toPrice: String{
         return "$\(Float(self) / 100)"
@@ -67,43 +78,37 @@ extension String {
     }
 }
 
-//func sentOrderMail(cart: Cart, userEmail: String, shippingAddress: String) {
-//    let eshopEmail = "eshopios2019@gmail.com"
-//    
-//    var smtpSession = MCOSMTPSession()
-//    smtpSession.hostname = "smtp.gmail.com"
-//    smtpSession.username = eshopEmail
-//    smtpSession.password = "ios2019eshop"
-//    smtpSession.port = 465
-//    smtpSession.authType = MCOAuthType.SASLPlain
-//    smtpSession.connectionType = MCOConnectionType.TLS
-//    smtpSession.connectionLogger = {(connectionID, type, data) in
-//        if let data = data, let string = NSString(data: data, encoding: NSUTF8StringEncoding) {
-//            NSLog("Connectionlogger: \(string)")
-//        }
-//    }
-//    
-//    var builder = MCOMessageBuilder()
-//    builder.header.to = [MCOAddress(displayName: "Server", mailbox: eshopEmail)]
-//    builder.header.from = MCOAddress(displayName: "Client", mailbox: eshopEmail)
-//    builder.header.subject = "Order"
-//    builder.htmlBody = [
-//        "email: \(userEmail)",
-//        "shipping address: \(shippingAddress)",
-//        "contents:",
-//        cart.productsId.map {"product id: \($0) - count: \(cart[$0])"} .joined(separator: "\n")
-//    ].joined(separator: "\n")
-//    
-//    let rfc822Data = builder.data()
-//    let sendOperation = smtpSession.sendOperationWithData(rfc822Data)
-//    sendOperation.start { (error) -> Void in
-//        if (error != nil) {
-//            NSLog("Error sending email: \(error)")
-//        } else {
-//            NSLog("Successfully sent email!")
-//        }
-//    }
-//}
+func sentOrderMail(cart: Cart, userEmail: String, phone: String, shippingAddress: String, _ callback: @escaping (Error?) -> Void) {
+    let eshopEmail = "eshopios2019@gmail.com" //password = "ios2019eshop"
+    let sender = "eshop2019@mail.bg"
+    
+    let smtpSession = MCOSMTPSession()
+    smtpSession.hostname = "smtp.mail.bg"
+    smtpSession.username = sender
+    smtpSession.password = "daniboybye"
+    smtpSession.port = 465
+    smtpSession.authType = .saslPlain
+    smtpSession.connectionType = .TLS
+    smtpSession.connectionLogger = {(connectionID, type, data) in
+        if let data = data, let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
+            print("Connectionlogger: \(string)")
+        }
+    }
+    
+    let builder = MCOMessageBuilder()
+    builder.header.to = [MCOAddress(displayName: "Server", mailbox: eshopEmail)]
+    builder.header.from = MCOAddress(displayName: "Client", mailbox: sender)
+    builder.header.subject = "Order"
+    builder.htmlBody = [
+        "email: \(userEmail)",
+        "phone: \(phone)",
+        "shipping address: \(shippingAddress)",
+        "contents:",
+        cart.productsId.map {"\tproduct id: \($0) - count: \(cart[$0])"} .joined(separator: "\r\n")
+    ].joined(separator: "\r\n")
+    
+    smtpSession.sendOperation(with: builder.data())?.start(callback)
+}
 
 //https://stackoverflow.com/questions/25919472/adding-a-closure-as-target-to-a-uibutton
 class ClosureSleeve {

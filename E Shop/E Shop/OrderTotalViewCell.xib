@@ -32,6 +32,7 @@
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="haC-Rp-49c" firstAttribute="centerY" secondItem="key-bb-cne" secondAttribute="centerY" id="0PI-je-SlV"/>
                 <constraint firstItem="key-bb-cne" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="UXs-be-Jdg"/>

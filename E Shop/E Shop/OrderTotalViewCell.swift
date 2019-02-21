@@ -11,7 +11,3 @@ import UIKit
 class OrderTotalViewCell: UICollectionViewCell {
     @IBOutlet weak var priceView: UILabel!
 }
-
-func initView(view: OrderTotalViewCell, cart: Cart, catalog: Catalog) {
-    view.priceView.text = cart.totalPrice(catalog: catalog).toPrice
-}

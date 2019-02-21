@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="OrderTotalViewCell" customModule="E_Shop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL:" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="key-bb-cne">
+                        <rect key="frame" x="3" y="5" width="369" height="65"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1000.99" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haC-Rp-49c">
+                        <rect key="frame" x="3" y="5" width="369" height="65"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="haC-Rp-49c" firstAttribute="centerY" secondItem="key-bb-cne" secondAttribute="centerY" id="0PI-je-SlV"/>
+                <constraint firstItem="key-bb-cne" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="UXs-be-Jdg"/>
+                <constraint firstItem="haC-Rp-49c" firstAttribute="trailing" secondItem="key-bb-cne" secondAttribute="trailing" id="Zhn-fE-gUP"/>
+                <constraint firstItem="haC-Rp-49c" firstAttribute="height" secondItem="key-bb-cne" secondAttribute="height" id="cTh-ju-sFQ"/>
+                <constraint firstItem="haC-Rp-49c" firstAttribute="width" secondItem="key-bb-cne" secondAttribute="width" id="gUj-mS-Kwe"/>
+                <constraint firstAttribute="trailing" secondItem="haC-Rp-49c" secondAttribute="trailing" constant="3" id="rv5-28-dyx"/>
+                <constraint firstItem="key-bb-cne" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="tC1-qd-0S9"/>
+                <constraint firstAttribute="bottom" secondItem="key-bb-cne" secondAttribute="bottom" constant="5" id="uR7-Io-57F"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="priceView" destination="haC-Rp-49c" id="pUp-bb-QTe"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="154.27286356821591"/>
+        </collectionViewCell>
+    </objects>
+</document>

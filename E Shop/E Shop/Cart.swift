@@ -60,4 +60,9 @@ class Cart {
             return products.sorted { $0.value.orderId < $1.value.orderId} .map {$0.key}
         }
     }
+    
+    //$1.99 => UInt(199)
+    func totalPrice(catalog: Catalog) -> UInt {
+        return products.map {UInt(catalog[$0.key].price.floatValue * 100) * $0.value.count} .reduce(0, +)
+    }
 }

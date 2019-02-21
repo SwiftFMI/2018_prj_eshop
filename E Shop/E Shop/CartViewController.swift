@@ -123,15 +123,12 @@ class CartViewController: UICollectionViewController {
     }
     
     private func initView(view: CartSummaryCollectionViewCell) {
-        let totalPrice = UInt(productsId.map {
-            let product = model.catalog[$0]
-            return Double(product.price.floatValue * Float(model.cart[$0]))
-        }.reduce(0.0, +) * 100.0)
+        let totalPrice = model.cart.totalPrice(catalog: model.catalog)
         let vat = UInt(Float(totalPrice) * 0.2)
         view.savedView.text = "$0.0"
-        view.vatView.text = toPrice(vat)
-        view.subtotalView.text = toPrice(totalPrice - vat)
-        view.totalView.text = toPrice(totalPrice)
+        view.vatView.text = vat.toPrice
+        view.subtotalView.text = (totalPrice - vat).toPrice
+        view.totalView.text = totalPrice.toPrice
     }
 }
 

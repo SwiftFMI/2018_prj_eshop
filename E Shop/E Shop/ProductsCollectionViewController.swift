@@ -109,7 +109,6 @@ class ProductsCollectionViewController: UICollectionViewController {
     @IBAction func willAppearHamburgerMenu() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let hamburgerMenuViewController = storyboard.instantiateViewController(withIdentifier: "HamburgerMenuViewController") as! HamburgerMenuViewController
-        hamburgerMenuViewController.catalog = catalog
         navigationController!.pushViewController(hamburgerMenuViewController, animated: true)
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HamburgerMenuViewController : UICollectionViewController
+class HamburgerTableViewController : UITableViewController
 {
     override func viewDidLoad()
     {
@@ -21,6 +21,5 @@ class HamburgerMenuViewController : UICollectionViewController
         super.didReceiveMemoryWarning()
     }
     
-    var catalog : Catalog!
 }
 

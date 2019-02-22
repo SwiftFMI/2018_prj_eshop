@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-137" y="-31"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Hamburger Table View Controller-->
         <scene sceneID="RQ6-Vp-vAU">
             <objects>
-                <tableViewController id="quR-nc-pGf" sceneMemberID="viewController">
+                <tableViewController id="quR-nc-pGf" customClass="HamburgerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bmg-IH-0jT" userLabel="Hamburger Table View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,6 +165,9 @@
                                 <state key="normal" image="menu_drawer">
                                     <attributedString key="attributedTitle"/>
                                 </state>
+                                <connections>
+                                    <action selector="willAppearHamburgerMenu" destination="uL0-jT-UAs" eventType="touchUpInside" id="ZQY-5U-dZ8"/>
+                                </connections>
                             </button>
                             <connections>
                                 <action selector="willAppearHamburgerMenu:" destination="uL0-jT-UAs" id="Ara-GM-hdS"/>

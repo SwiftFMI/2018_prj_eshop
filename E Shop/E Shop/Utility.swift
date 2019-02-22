@@ -78,6 +78,15 @@ extension String {
     }
 }
 
+extension Set {
+    mutating func insert(_ newMembers: [Set.Element]) -> Set<Element> {
+        newMembers.forEach {
+            self.insert($0)
+        }
+        return self
+    }
+}
+
 func sentOrderMail(cart: Cart, userEmail: String, phone: String, shippingAddress: String, _ callback: @escaping (Error?) -> Void) {
     let eshopEmail = "eshopios2019@gmail.com" //password = "ios2019eshop"
     let sender = "eshop2019@mail.bg"

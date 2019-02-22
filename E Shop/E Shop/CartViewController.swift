@@ -38,6 +38,7 @@ class CartViewController: UICollectionViewController {
     }
     
     private func reloadAfterCountUpdate(indexPath: IndexPath) {
+        checkoutButton.isHidden = cart.isEmpty
         collectionView.reloadItems(at: [indexPath])
         collectionView.reloadSections(IndexSet(1...1))
     }
@@ -75,10 +76,12 @@ class CartViewController: UICollectionViewController {
         navigationItem.setRightBarButton(UIBarButtonItem(customView: checkoutButton), animated: false)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkoutButton.isHidden = cart.isEmpty
+    }
+    
     @IBAction func checkout() {
-        guard cart.isEmpty == false else {
-            return
-        }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let orderViewController = storyboard.instantiateViewController(withIdentifier: "OrderViewController") as! OrderViewController
         orderViewController.setModel(cart: cart, catalog: catalog)
@@ -107,10 +110,10 @@ class CartViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         cart.removeProduct(id: productsId[indexPath.row])
         productsId.remove(at: indexPath.row)
+        checkoutButton.isHidden = cart.isEmpty
         //collectionView.deleteItems(at: [indexPath])
-        collectionView.performBatchUpdates( { [weak self] in
-            self?.collectionView.reloadData()
-        })
+        collectionView.reloadData()
+        collectionView.setNeedsDisplay()
     }
     
     private func initView(indexPath: IndexPath, view: CartViewProductCell) {
@@ -124,6 +127,8 @@ class CartViewController: UICollectionViewController {
         view.minusButton.addAction(for: .touchUpInside) { [weak self] in
             self?.decrementProductCount(indexPath: indexPath, id: id)
         }
+        view.deleteButton.isEnabled = false
+        view.isHiddenCountsView = false
         view.minusButton.isHidden = count == 0
         view.countView.text = String(count)
         view.titleView.text = product.title

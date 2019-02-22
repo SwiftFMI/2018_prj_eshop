@@ -51,6 +51,12 @@ class SearchCollectionViewController: UICollectionViewController {
             )
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchBar(searchBar, textDidChange: searchBar.text ?? "")
+        collectionView.backgroundColor = .white
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -83,14 +89,27 @@ extension SearchCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+private func match(text: String, pattern: String) -> Bool {
+    return text.range(of: pattern, options: .caseInsensitive) != nil
+}
+
 extension SearchCollectionViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //simple ineffective algorithm
-        
-        products = searchText == "" ?
-            [] :
-            catalog.products.filter {
-                $0.title.range(of: searchText, options: .caseInsensitive) != nil
+        if searchText == "" {
+            products = []
+        } else {
+            var set: Set<Product> = Set()
+            set.formUnion(catalog.products.filter { match(text: $0.title, pattern: searchText) })
+            set.formUnion(catalog.products.filter {
+                let category = catalog.getCategory(id: $0.category)
+                if let parentId = category.parentId, match(text: catalog.getCategory(id: parentId).title, pattern: searchText) {
+                    return true
+                }
+                return match(text: category.title, pattern: searchText)
+            })
+            set.formUnion(catalog.products.filter {match(text: $0.description, pattern: searchText)})
+            products = Array(set)
         }
     }
     

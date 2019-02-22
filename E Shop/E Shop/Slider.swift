@@ -17,6 +17,7 @@ class Slider: NSObject, UICollectionViewDataSource {
     
     var products: [Product] = [] {
         didSet {
+            view?.productsView.reloadData()
             updatePageControlSize()
         }
     }

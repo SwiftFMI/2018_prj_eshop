@@ -8,10 +8,6 @@
 
 import UIKit
 
-let cart = Cart()
-
-var catalog: Catalog!
-
 let green = UIColor(displayP3Red: 132.0/255.0, green: 191.0/255.0, blue: 37.0/255.0, alpha: 1.0)
 
 private let reuseIdentifiers = ["SliderViewCell", "ProductCollectionViewCell"]
@@ -20,6 +16,15 @@ private let catalogUrl = Bundle.main.url(forResource: "catalog", withExtension: 
 private let titleImageUrl = Bundle.main.url(forResource: "titleImage", withExtension: "jpg")!
 
 class ProductsCollectionViewController: UICollectionViewController {
+    let cart = Cart()
+    
+    private(set) var catalog: Catalog! {
+        didSet {
+            slider.products = catalog.sliderProducts
+            collectionView.reloadData()
+        }
+    }
+
     @IBOutlet weak var cartButton: UIButton! {
         didSet {
             cartButton.setTitleColor(green, for: .normal)
@@ -29,17 +34,9 @@ class ProductsCollectionViewController: UICollectionViewController {
     
     private let slider = Slider()
     
-    private var sliderHidden = true {
-        didSet {
-            if oldValue != sliderHidden {
-                collectionView.reloadSections(IndexSet(0...0))
-            }
-        }
-    }
-    
-    private var products: [Product] = [] {
-        didSet {
-            collectionView.reloadSections(IndexSet(1...1))
+    private var products: [Product] {
+        get {
+            return catalog?.tableProducts ?? []
         }
     }
     
@@ -62,17 +59,14 @@ class ProductsCollectionViewController: UICollectionViewController {
                 print("invalid json url")
                 return
             }
-            catalog = try? JSONDecoder().decode(Catalog.self, from: json)
-            guard catalog != nil else {
+            guard let catalog = try? JSONDecoder().decode(Catalog.self, from: json) else {
                 print("invalid json format")
                 return
             }
             DispatchQueue.main.async {
                 self?.navigationController?.navigationBar.isHidden = false
                 self?.spinner.stopAnimating()
-                self?.slider.products = catalog.sliderProducts
-                self?.sliderHidden = self?.slider.isHidden ?? true
-                self?.products = catalog.tableProducts
+                self?.catalog = catalog
             }
         }
     }
@@ -113,12 +107,6 @@ class ProductsCollectionViewController: UICollectionViewController {
         navigationController!.pushViewController(hamburgerMenuViewController, animated: true)
     }
     
-//
-//    func initViewController(_ viewController: SearchCollectionViewController) {
-//        viewController.catalog = catalog
-//        viewController.delegate = self
-//    }
-    
     private func config(navigationBar: UINavigationBar) {
         navigationBar.tintColor = .white
         navigationBar.barTintColor = green
@@ -147,10 +135,7 @@ class ProductsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 1 {
-            return products.count
-        }
-        return sliderHidden ? 0 : 1
+        return section == 1 ? products.count : 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -205,7 +190,6 @@ extension ProductsCollectionViewController: CartDelegate {
             for: .normal
         )
         cartButton.setTitle(nil, for: .normal)
-        cartButton.isEnabled = false
     }
     
     private func setCartButtonImage() {
@@ -217,7 +201,6 @@ extension ProductsCollectionViewController: CartDelegate {
             ),
             for: .normal
         )
-        cartButton.isEnabled = true
     }
     
     func updateProducts(count: UInt) {

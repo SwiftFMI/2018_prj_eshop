@@ -29,7 +29,7 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     
     private var countsViewArr: [UIView] {
         get {
-            return [qtyView, plusButton, minusButton, countView]
+            return [qtyView, plusButton, minusButton]
         }
     }
     
@@ -94,11 +94,11 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         let width = contentView.frame.width
         let height = contentView.frame.height
         let offset = CartViewProductCell.deleteButtonAspectCoef * width
-        //todo begin
+        
         if pan.state == .changed {
-            
+            let x = self.contentView.frame.minX
             self.contentView.frame = CGRect(
-                x: min(point.x, 0),
+                x: min(point.x + x, 0),
                 y: 0,
                 width: width,
                 height: height
@@ -109,12 +109,11 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
                 width: min(offset, width - self.contentView.frame.maxX),
                 height: height
             )
-        }
-        else if deleteButton.isEnabled {
+        } else if deleteButton.isEnabled {
             contentView.frame = CGRect(
-                x: 0,
+                x: -offset,
                 y: 0,
-                width: width - offset,
+                width: width,
                 height: height
             )
             deleteButton.frame = CGRect(
@@ -147,7 +146,14 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     @objc func onPan(_ pan: UIPanGestureRecognizer) {
         switch pan.state {
         case .began:
-            isHiddenCountsView = true
+            if !deleteButton.isEnabled {
+                (superview as! UICollectionView).setNeedsDisplay()
+            }
+            if !isHiddenCountsView {
+                UIView.animate(withDuration: 0.2) {
+                    self.isHiddenCountsView = true
+                }
+            }
         case .changed:
             setNeedsLayout()
         default:
@@ -158,8 +164,8 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             }
             let flag = x < (1.0 - CartViewProductCell.deleteButtonAspectCoef * 0.9) * contentView.frame.width
             deleteButton.isEnabled = flag
-            isHiddenCountsView = flag
             UIView.animate(withDuration: 0.5) {
+                self.isHiddenCountsView = flag
                 self.setNeedsLayout()
             }
         }
@@ -170,6 +176,6 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     }
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return abs(pan.velocity(in: pan.view).x) > abs(pan.velocity(in: pan.view).y)
+        return (abs(pan.velocity(in: pan.view).x) > abs(pan.velocity(in: pan.view).y) && deleteButton.isEnabled) || (-pan.velocity(in: pan.view).x > abs(pan.velocity(in: pan.view).y) && !deleteButton.isEnabled)
     }
 }

@@ -113,7 +113,6 @@ class CartViewController: UICollectionViewController {
         checkoutButton.isHidden = cart.isEmpty
         //collectionView.deleteItems(at: [indexPath])
         collectionView.reloadData()
-        collectionView.setNeedsDisplay()
     }
     
     private func initView(indexPath: IndexPath, view: CartViewProductCell) {

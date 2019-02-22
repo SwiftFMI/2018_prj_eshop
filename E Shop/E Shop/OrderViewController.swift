@@ -134,7 +134,7 @@ class OrderViewController: UICollectionViewController {
                 guard let cart = self?.cart else {
                     return
                 }
-                sentOrderMail(cart: cart, userEmail: email, phone: phone, shippingAddress: address) { error in
+                sentOrderMail(cart: cart, name: fullName, userEmail: email, phone: phone, shippingAddress: address) { error in
                     DispatchQueue.main.async {
                         guard let button = view?.sendOrderButton else {
                             return

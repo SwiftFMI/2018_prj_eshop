@@ -87,7 +87,7 @@ extension Set {
     }
 }
 
-func sentOrderMail(cart: Cart, userEmail: String, phone: String, shippingAddress: String, _ callback: @escaping (Error?) -> Void) {
+func sentOrderMail(cart: Cart, name: String, userEmail: String, phone: String, shippingAddress: String, _ callback: @escaping (Error?) -> Void) {
     let eshopEmail = "eshopios2019@gmail.com" //password = "ios2019eshop"
     let sender = "eshop2019@mail.bg"
     
@@ -109,12 +109,13 @@ func sentOrderMail(cart: Cart, userEmail: String, phone: String, shippingAddress
     builder.header.from = MCOAddress(displayName: "Client", mailbox: sender)
     builder.header.subject = "Order"
     builder.htmlBody = [
+        "name: \(name)",
         "email: \(userEmail)",
         "phone: \(phone)",
         "shipping address: \(shippingAddress)",
         "contents:",
-        cart.productsId.map {"\tproduct id: \($0) - count: \(cart[$0])"} .joined(separator: "\r\n")
-    ].joined(separator: "\r\n")
+        cart.productsId.map {"\tproduct id: \($0) - count: \(cart[$0])"} .joined(separator: "<br>")
+    ].joined(separator: "<br>")
     
     smtpSession.sendOperation(with: builder.data())?.start(callback)
 }

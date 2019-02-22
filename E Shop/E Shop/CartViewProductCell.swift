@@ -147,7 +147,9 @@ class CartViewProductCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         switch pan.state {
         case .began:
             if !deleteButton.isEnabled {
-                (superview as! UICollectionView).setNeedsDisplay()
+                let view = superview as! UICollectionView
+                view.reloadData()
+                view.setNeedsLayout()
             }
             if !isHiddenCountsView {
                 UIView.animate(withDuration: 0.2) {

@@ -19,22 +19,22 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jlk-dq-lMU">
-                        <rect key="frame" x="5" y="0.0" width="144" height="50"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <rect key="frame" x="5" y="0.0" width="184" height="50"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="$1000.99" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgQ-GU-7Yg">
-                        <rect key="frame" x="195" y="0.0" width="120" height="50"/>
+                        <rect key="frame" x="235" y="0.0" width="80" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="120" id="Ly9-xf-Ogm"/>
+                            <constraint firstAttribute="width" constant="80" id="Ly9-xf-Ogm"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11x" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DmC-fG-EaG">
-                        <rect key="frame" x="157" y="0.0" width="30" height="50"/>
+                        <rect key="frame" x="197" y="0.0" width="30" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="4NM-Ig-e5l"/>
                         </constraints>

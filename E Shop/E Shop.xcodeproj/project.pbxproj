@@ -44,6 +44,8 @@
 		E594699321B6AA5A007A3CE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E594699121B6AA5A007A3CE8 /* Main.storyboard */; };
 		E594699B21B6AAB9007A3CE8 /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E594699A21B6AAB9007A3CE8 /* AppAssets.xcassets */; };
 		E594699D21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E594699C21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets */; };
+		E5C50A4D2220137E008697DF /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C50A4C2220137E008697DF /* CategoryTableCell.xib */; };
+		E5C50A4F2220146A008697DF /* SubCategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5C50A4E2220146A008697DF /* SubCategoryTableCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +155,8 @@
 		E594699421B6AA5A007A3CE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E594699A21B6AAB9007A3CE8 /* AppAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = AppAssets.xcassets; path = ../../assets/AppAssets.xcassets; sourceTree = "<group>"; };
 		E594699C21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = ShopLocalAssets.xcassets; path = ../../assets/ShopLocalAssets.xcassets; sourceTree = "<group>"; };
+		E5C50A4C2220137E008697DF /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableCell.xib; sourceTree = "<group>"; };
+		E5C50A4E2220146A008697DF /* SubCategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubCategoryTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +254,8 @@
 				CF5A45352216197C00385CB9 /* titleImage.jpg */,
 				E594699421B6AA5A007A3CE8 /* Info.plist */,
 				E5154EA3221AF92A00A84E48 /* HamburgerMenuViewController.swift */,
+				E5C50A4C2220137E008697DF /* CategoryTableCell.xib */,
+				E5C50A4E2220146A008697DF /* SubCategoryTableCell.xib */,
 			);
 			path = "E Shop";
 			sourceTree = "<group>";
@@ -387,10 +393,12 @@
 				CF273CA621F2331E00C40D0C /* ProductCollectionViewCell.xib in Resources */,
 				CFB0C445221A1BE800DEFE55 /* ProductDetailViewController.xib in Resources */,
 				CF8922D021FB680A00EFDC24 /* SliderViewCell.xib in Resources */,
+				E5C50A4F2220146A008697DF /* SubCategoryTableCell.xib in Resources */,
 				CF0C11EE221C28AB0067D023 /* CartSummaryCollectionViewCell.xib in Resources */,
 				CF5B2D6B221F0A540054EAE5 /* OrderProductViewCell.xib in Resources */,
 				E594699021B6AA5A007A3CE8 /* Assets.xcassets in Resources */,
 				CF5B2D71221F0A540054EAE5 /* OrderTotalViewCell.xib in Resources */,
+				E5C50A4D2220137E008697DF /* CategoryTableCell.xib in Resources */,
 				E594699B21B6AAB9007A3CE8 /* AppAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

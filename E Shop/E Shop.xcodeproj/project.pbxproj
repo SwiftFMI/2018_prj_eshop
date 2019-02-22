@@ -35,7 +35,6 @@
 		CFB0C444221A1BE800DEFE55 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0C442221A1BE800DEFE55 /* ProductDetailViewController.swift */; };
 		CFB0C445221A1BE800DEFE55 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFB0C443221A1BE800DEFE55 /* ProductDetailViewController.xib */; };
 		CFC32B1821EF572E007001C5 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC32B1721EF572E007001C5 /* Catalog.swift */; };
-		CFC349DC221F1D24002D7118 /* libMailCore-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC349CC221F1CB7002D7118 /* libMailCore-ios.a */; };
 		CFC349DE221F1D56002D7118 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC349DD221F1D56002D7118 /* CFNetwork.framework */; };
 		CFC349E0221F1D5C002D7118 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFC349DF221F1D5C002D7118 /* Security.framework */; };
 		E5154EA4221AF92A00A84E48 /* HamburgerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5154EA3221AF92A00A84E48 /* HamburgerMenuViewController.swift */; };
@@ -45,72 +44,6 @@
 		E594699B21B6AAB9007A3CE8 /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E594699A21B6AAB9007A3CE8 /* AppAssets.xcassets */; };
 		E594699D21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E594699C21B6AAE0007A3CE8 /* ShopLocalAssets.xcassets */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		CFC349C9221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C64EA537169E772200778456;
-			remoteInfo = "static mailcore2 osx";
-		};
-		CFC349CB221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C6BA2C191705F4E6003F0E9E;
-			remoteInfo = "static mailcore2 ios";
-		};
-		CFC349CD221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C64EA78C169F259200778456;
-			remoteInfo = tests;
-		};
-		CFC349CF221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C6A81B911706840C00882C15;
-			remoteInfo = "test-ios";
-		};
-		CFC349D1221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C6BD288D170BD71100A91AC1;
-			remoteInfo = "mailcore osx";
-		};
-		CFC349D3221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 27780C3A19CF9CD100C77E44;
-			remoteInfo = "mailcore ios";
-		};
-		CFC349D5221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C6B5AE0219F630B3001352A6;
-			remoteInfo = unittest;
-		};
-		CFC349D7221F1CB7002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C600B6141A242C3F000728F1;
-			remoteInfo = unittestcpp;
-		};
-		CFC349D9221F1CE8002D7118 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C6BA2B091705F4E6003F0E9E;
-			remoteInfo = "static mailcore2 ios";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CF0C11EB221C28A90067D023 /* CartSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -141,7 +74,6 @@
 		CFB0C442221A1BE800DEFE55 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		CFB0C443221A1BE800DEFE55 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		CFC32B1721EF572E007001C5 /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
-		CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = mailcore2.xcodeproj; path = "mailcore2/build-mac/mailcore2.xcodeproj"; sourceTree = "<group>"; };
 		CFC349DD221F1D56002D7118 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CFC349DF221F1D5C002D7118 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CFC349E2221F238C002D7118 /* E Shop-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "E Shop-Bridge-Header.h"; path = "/Users/danielurumov/Documents/2018_prj_eshop/E Shop/E Shop/E Shop-Bridge-Header.h"; sourceTree = "<absolute>"; };
@@ -162,28 +94,12 @@
 			files = (
 				CFC349E0221F1D5C002D7118 /* Security.framework in Frameworks */,
 				CFC349DE221F1D56002D7118 /* CFNetwork.framework in Frameworks */,
-				CFC349DC221F1D24002D7118 /* libMailCore-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CFC349BF221F1CB5002D7118 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CFC349CA221F1CB7002D7118 /* libMailCore.a */,
-				CFC349CC221F1CB7002D7118 /* libMailCore-ios.a */,
-				CFC349CE221F1CB7002D7118 /* tests */,
-				CFC349D0221F1CB7002D7118 /* test-ios.app */,
-				CFC349D2221F1CB7002D7118 /* MailCore.framework */,
-				CFC349D4221F1CB7002D7118 /* MailCore.framework */,
-				CFC349D6221F1CB7002D7118 /* unittest.xctest */,
-				CFC349D8221F1CB7002D7118 /* unittestcpp */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CFC349DB221F1D24002D7118 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,7 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				CFC349E2221F238C002D7118 /* E Shop-Bridge-Header.h */,
-				CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */,
 				CFA4D317221B804E001972EC /* CartViewProductCell.swift */,
 				CF0C11EB221C28A90067D023 /* CartSummaryCollectionViewCell.swift */,
 				CF0C11EF221C33250067D023 /* CartViewController.swift */,
@@ -268,7 +183,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CFC349DA221F1CE8002D7118 /* PBXTargetDependency */,
 			);
 			name = "E Shop";
 			productName = "E Shop";
@@ -301,77 +215,12 @@
 			mainGroup = E594697C21B6AA4F007A3CE8;
 			productRefGroup = E594698621B6AA4F007A3CE8 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = CFC349BF221F1CB5002D7118 /* Products */;
-					ProjectRef = CFC349BE221F1CB5002D7118 /* mailcore2.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				E594698421B6AA4F007A3CE8 /* E Shop */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		CFC349CA221F1CB7002D7118 /* libMailCore.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libMailCore.a;
-			remoteRef = CFC349C9221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CFC349CC221F1CB7002D7118 /* libMailCore-ios.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libMailCore-ios.a";
-			remoteRef = CFC349CB221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CFC349CE221F1CB7002D7118 /* tests */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = tests;
-			remoteRef = CFC349CD221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CFC349D0221F1CB7002D7118 /* test-ios.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "test-ios.app";
-			remoteRef = CFC349CF221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CFC349D2221F1CB7002D7118 /* MailCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MailCore.framework;
-			remoteRef = CFC349D1221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CFC349D4221F1CB7002D7118 /* MailCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MailCore.framework;
-			remoteRef = CFC349D3221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CFC349D6221F1CB7002D7118 /* unittest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = unittest.xctest;
-			remoteRef = CFC349D5221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CFC349D8221F1CB7002D7118 /* unittestcpp */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = unittestcpp;
-			remoteRef = CFC349D7221F1CB7002D7118 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E594698321B6AA4F007A3CE8 /* Resources */ = {
@@ -426,14 +275,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CFC349DA221F1CE8002D7118 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "static mailcore2 ios";
-			targetProxy = CFC349D9221F1CE8002D7118 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E594699121B6AA5A007A3CE8 /* Main.storyboard */ = {
